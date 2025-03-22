@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply antialiased;
+  }
+
+  .font-heading {
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+}
+h1 {font-style:italic;}
+
+@keyframes slidePattern {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.from-purple-600 {
+    --tw-gradient-from: purple var(--tw-gradient-from-position);}
+
+.bg-purple {
+    background-color:  purple;}
+
+
+.mytexture {
+  background-image: url(https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/clean-gray-paper2.png);
+  background-attachment: fixed;
+  }
+
+.italic {font-style:italic;}
+

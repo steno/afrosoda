@@ -1,0 +1,14 @@
+/* src/components/BubbleEffect.css */
+.bubble-container {
+  position: relative;
+  width: 100vw;
+  height: 10vh;
+  overflow: hidden;
+  background-color: #f0f0f0; /* Light background for visibility */
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.7;
+}

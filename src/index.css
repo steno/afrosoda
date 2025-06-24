@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: Poppins, sans-serif;
+  }
+  
+  body {
+    @apply antialiased;
+    font-family: Poppins, sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+}
+h1 {font-style:italic;}
+
+@keyframes slidePattern {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.from-purple-600 {
+    --tw-gradient-from: purple var(--tw-gradient-from-position);}
+
+.bg-purple {
+    background-color:  purple;}
+
+
+.mytexture {
+  background-image: url(https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/clean-gray-paper2.png);
+  background-attachment: fixed;
+  }
+
+.italic {font-style:italic;}
+
+.border-red-500 {
+    --tw-border-opacity: 1;
+    border-color: lime;
+}
+.text-red-500 {
+    --tw-text-opacity: 1;
+    color: lime;
+}
+
+/* Media query for mobile devices (e.g., screens smaller than 640px) */
+@media (max-width: 640px) {
+    .text-4xl {
+        font-size: 2rem; /* Smaller font size for mobile */
+        line-height: 2.5rem; /* Adjusted line height */
+    }
+}
+
+

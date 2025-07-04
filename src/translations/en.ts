@@ -244,7 +244,7 @@ export const en: Translation = {
     sections: {
       company: {
         title: 'Company Information',
-        name: 'DjuDju Beer International',
+        name: 'D. Tagoe Imports',
         address: ['Konradinstrasse 5', '12105 Berlin', 'Germany'],
         contact: {
           phone: 'Phone: +49 308 911 602',
@@ -267,13 +267,13 @@ export const en: Translation = {
       },
       authority: {
         title: 'Regulatory Authority',
-        content: 'DjuDju Beer International operates under the supervision of the local trade office (Gewerbeamt) in Berlin.'
+        content: 'D. Tagoe Imports operates under the supervision of the local trade office (Gewerbeamt) in Berlin.'
       },
       responsible: {
         title: 'Responsible for Content',
         content: [
           'David Nii Ayi Tagoe',
-          'DjuDju Beer International',
+          'D. Tagoe Imports',
           'Konradinstrasse 5',
           '12105 Berlin',
           'Germany'

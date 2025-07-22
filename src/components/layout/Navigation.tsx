@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Facebook, 
   Instagram, 
-  Linkedin, 
   Menu, 
   X, 
   Globe
 } from 'lucide-react';
+import TikTokIcon from '../icons/TikTokIcon';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '../../hooks/useTranslation';
 import { useLanguage } from '../../context/LanguageContext';
@@ -30,14 +29,11 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile, scrollToTop }) => {
           <div className="flex items-center justify-between h-16">
             {/* Social Media Icons - Left side on desktop, hidden on mobile */}
             <div className="hidden md:flex items-center gap-4">
-              <a href="#" className="text-white/70 hover:text-white transition-colors">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <a href="https://www.instagram.com/afrosoda12" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-white/70 hover:text-white transition-colors">
-                <Linkedin className="w-5 h-5" />
+              <a href="https://www.tiktok.com/@afrosoda12" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
+                <TikTokIcon className="w-5 h-5" />
               </a>
             </div>
 

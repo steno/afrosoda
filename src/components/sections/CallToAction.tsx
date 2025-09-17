@@ -28,7 +28,7 @@ const CallToAction: React.FC = () => {
           {t('cta', 'title')}
         </motion.h2>
         <motion.a
-          href="https://www.amazon.de/dp/B0D5MRMJ42"  // Replace with your actual URL
+          href="https://www.africadrinks.de/"  // AfricaDrinks website
           target="_blank"                    // Optional: opens in new tab
           rel="noopener noreferrer"          // Optional: security for new tab
           whileHover={{ scale: 1.05 }}

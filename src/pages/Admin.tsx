@@ -320,8 +320,8 @@ const AdminPage: React.FC = () => {
 
   return (
     <SimpleLayout>
-      <div className="min-h-screen bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-4">
+      <div className="min-h-screen bg-gray-50 pt-20 pb-8">
+        <div className="max-w-7xl mx-auto px-4 w-full">
           {/* Header */}
           <div className="mb-8">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4">

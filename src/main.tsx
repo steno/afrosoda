@@ -6,6 +6,7 @@ import AboutPage from './pages/About.tsx';
 import PrivacyPage from './pages/Privacy.tsx';
 import ContactPage from './pages/Contact.tsx';
 import ImprintPage from './pages/Imprint.tsx';
+import AdminPage from './pages/Admin.tsx';
 import { AudioProvider } from './context/AudioContext';
 import { LanguageProvider } from './context/LanguageContext';
 import CookieConsent from './components/CookieConsent.tsx';
@@ -34,6 +35,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/imprint" element={<ImprintPage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
           <CookieConsent />
         </BrowserRouter>

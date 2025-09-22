@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { createClient } from '@supabase/supabase-js';
-import { Mail, Building, Calendar, User, Phone, MapPin, MessageSquare, CheckCircle, Clock, AlertCircle, X, Lock } from 'lucide-react';
+import { Mail, Building, Calendar, User, Phone, MapPin, MessageSquare, CheckCircle, Clock, AlertCircle, X, Lock, Trash2 } from 'lucide-react';
 import SimpleLayout from '../components/SimpleLayout';
 
 // Initialize Supabase client
@@ -78,6 +78,36 @@ const AdminPage: React.FC = () => {
     setLoginEmail('');
     setLoginPassword('');
     setLoginError('');
+  };
+
+  const deleteSubmission = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this submission? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .delete()
+        .eq('id', id);
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      // Remove from local state
+      setSubmissions(prev => prev.filter(sub => sub.id !== id));
+      
+      // Clear selected submission if it was the deleted one
+      if (selectedSubmission?.id === id) {
+        setSelectedSubmission(null);
+      }
+
+      alert('Submission deleted successfully');
+    } catch (err) {
+      console.error('Error deleting submission:', err);
+      alert('Error deleting submission: ' + (err instanceof Error ? err.message : 'Unknown error'));
+    }
   };
 
   const fetchSubmissions = async () => {
@@ -369,7 +399,19 @@ const AdminPage: React.FC = () => {
                               {submission.status.replace('_', ' ')}
                             </span>
                           </div>
-                          {getStatusIcon(submission.status)}
+                          <div className="flex items-center gap-2">
+                            {getStatusIcon(submission.status)}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                deleteSubmission(submission.id);
+                              }}
+                              className="text-red-500 hover:text-red-700 transition-colors p-1 hover:bg-red-50 rounded"
+                              title="Delete submission"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
                         <div className="text-sm text-gray-600 mb-2">
                           <div className="flex items-center gap-1">
@@ -524,6 +566,24 @@ const AdminPage: React.FC = () => {
                           Mark as Completed
                         </button>
                       </div>
+                    </div>
+
+                    {/* Delete Section */}
+                    <div className="border-t pt-4">
+                      <h3 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
+                        <Trash2 className="w-4 h-4 text-red-500" />
+                        Danger Zone
+                      </h3>
+                      <button
+                        onClick={() => deleteSubmission(selectedSubmission.id)}
+                        className="w-full px-3 py-2 text-sm bg-red-100 text-red-700 hover:bg-red-200 rounded-lg transition-colors flex items-center justify-center gap-2"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        Delete Submission
+                      </button>
+                      <p className="text-xs text-gray-500 mt-1 text-center">
+                        This action cannot be undone
+                      </p>
                     </div>
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { createClient } from '@supabase/supabase-js';
-import { Mail, Building, Calendar, User, Phone, MapPin, MessageSquare, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { Mail, Building, Calendar, User, Phone, MapPin, MessageSquare, CheckCircle, Clock, AlertCircle, X, Lock } from 'lucide-react';
 import SimpleLayout from '../components/SimpleLayout';
 
 // Initialize Supabase client
@@ -32,14 +32,58 @@ const AdminPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedSubmission, setSelectedSubmission] = useState<ContactSubmission | null>(null);
+  
+  // Simple authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(true);
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
+
+  // Valid admin credentials
+  const validCredentials = [
+    { email: 'info@africadrinks.de', password: '123456' },
+    { email: 'stefan.asemota@gmail.com', password: '123456' }
+  ];
 
   useEffect(() => {
-    fetchSubmissions();
-  }, []);
+    if (isAuthenticated) {
+      fetchSubmissions();
+    }
+  }, [isAuthenticated]);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoginError('');
+
+    const isValid = validCredentials.some(
+      cred => cred.email === loginEmail && cred.password === loginPassword
+    );
+
+    if (isValid) {
+      setIsAuthenticated(true);
+      setShowLoginModal(false);
+      setLoginEmail('');
+      setLoginPassword('');
+    } else {
+      setLoginError('Invalid email or password');
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setShowLoginModal(true);
+    setSubmissions([]);
+    setSelectedSubmission(null);
+    setLoginEmail('');
+    setLoginPassword('');
+    setLoginError('');
+  };
 
   const fetchSubmissions = async () => {
     try {
       setLoading(true);
+      // Use anon client to bypass RLS for now - we'll control access with the login modal
       const { data, error } = await supabase
         .from('contact_submissions')
         .select('*')
@@ -139,6 +183,82 @@ const AdminPage: React.FC = () => {
     return labels[type as keyof typeof labels] || type;
   };
 
+  // Show login modal if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <SimpleLayout>
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+          {/* Login Modal */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full mx-4"
+          >
+            <div className="text-center mb-6">
+              <Lock className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Admin Login</h2>
+              <p className="text-gray-600">Enter your credentials to access the admin dashboard</p>
+            </div>
+
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  placeholder="Enter admin email"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  placeholder="Enter password"
+                  required
+                />
+              </div>
+
+              {loginError && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-3 flex items-center">
+                  <AlertCircle className="w-5 h-5 text-red-500 mr-2" />
+                  <span className="text-red-700 text-sm">{loginError}</span>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                className="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors font-medium"
+              >
+                Sign In
+              </button>
+            </form>
+
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-500">
+                Demo credentials:<br />
+                <span className="font-mono text-xs">info@africadrinks.de / 123456</span><br />
+                <span className="font-mono text-xs">stefan.asemota@gmail.com / 123456</span>
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </SimpleLayout>
+    );
+  }
+
   if (loading) {
     return (
       <SimpleLayout>
@@ -177,8 +297,19 @@ const AdminPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
-            <p className="text-gray-600">Manage contact form submissions</p>
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
+                <p className="text-gray-600">Manage contact form submissions</p>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2"
+              >
+                <X className="w-4 h-4" />
+                Logout
+              </button>
+            </div>
             <div className="mt-4 flex items-center gap-4 text-sm">
               <div className="bg-white px-4 py-2 rounded-lg shadow-sm border">
                 <span className="text-gray-600">Total Submissions: </span>

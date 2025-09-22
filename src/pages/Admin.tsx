@@ -324,20 +324,22 @@ const AdminPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4">
           {/* Header */}
           <div className="mb-8">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Business Emails</h1>
-            <p className="text-gray-600">Manage emails from potential business partners</p>
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 mb-4">
+              <div className="flex-1 min-w-0">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Business Emails</h1>
+                <p className="text-gray-600">Manage emails from potential business partners</p>
               </div>
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2"
-              >
-                <X className="w-4 h-4" />
-                Logout
-              </button>
+              <div className="flex-shrink-0">
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2 text-sm"
+                >
+                  <X className="w-4 h-4" />
+                  Logout
+                </button>
+              </div>
             </div>
-            <div className="mt-4 flex items-center gap-4 text-sm">
+            <div className="flex flex-wrap items-center gap-4 text-sm">
               <div className="bg-white px-4 py-2 rounded-lg shadow-sm border">
                 <span className="text-gray-600">Total Emails: </span>
                 <span className="font-semibold text-gray-900">{submissions.length}</span>

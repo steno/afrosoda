@@ -280,14 +280,6 @@ const AdminPage: React.FC = () => {
                 Sign In
               </button>
             </form>
-
-            <div className="mt-6 text-center">
-              <p className="text-sm text-gray-500">
-                Demo credentials:<br />
-                <span className="font-mono text-xs">info@africadrinks.de / 123456</span><br />
-                <span className="font-mono text-xs">stefan.asemota@gmail.com / 123456</span>
-              </p>
-            </div>
           </motion.div>
         </div>
       </SimpleLayout>

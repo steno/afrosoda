@@ -81,7 +81,7 @@ const AdminPage: React.FC = () => {
   };
 
   const deleteSubmission = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this submission? This action cannot be undone.')) {
+    if (!confirm('Are you sure you want to delete this email? This action cannot be undone.')) {
       return;
     }
 
@@ -103,10 +103,10 @@ const AdminPage: React.FC = () => {
         setSelectedSubmission(null);
       }
 
-      alert('Submission deleted successfully');
+      alert('Email deleted successfully');
     } catch (err) {
       console.error('Error deleting submission:', err);
-      alert('Error deleting submission: ' + (err instanceof Error ? err.message : 'Unknown error'));
+      alert('Error deleting email: ' + (err instanceof Error ? err.message : 'Unknown error'));
     }
   };
 
@@ -329,8 +329,8 @@ const AdminPage: React.FC = () => {
           <div className="mb-8">
             <div className="flex justify-between items-start mb-4">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
-                <p className="text-gray-600">Manage contact form submissions</p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Business Emails</h1>
+            <p className="text-gray-600">Manage emails from potential business partners</p>
               </div>
               <button
                 onClick={handleLogout}
@@ -342,23 +342,23 @@ const AdminPage: React.FC = () => {
             </div>
             <div className="mt-4 flex items-center gap-4 text-sm">
               <div className="bg-white px-4 py-2 rounded-lg shadow-sm border">
-                <span className="text-gray-600">Total Submissions: </span>
+                <span className="text-gray-600">Total Emails: </span>
                 <span className="font-semibold text-gray-900">{submissions.length}</span>
               </div>
               <div className="bg-white px-4 py-2 rounded-lg shadow-sm border">
-                <span className="text-gray-600">New: </span>
+                <span className="text-gray-600">Unread: </span>
                 <span className="font-semibold text-blue-600">
                   {submissions.filter(s => s.status === 'new').length}
                 </span>
               </div>
               <div className="bg-white px-4 py-2 rounded-lg shadow-sm border">
-                <span className="text-gray-600">In Progress: </span>
+                <span className="text-gray-600">Read: </span>
                 <span className="font-semibold text-yellow-600">
                   {submissions.filter(s => s.status === 'in_progress').length}
                 </span>
               </div>
               <div className="bg-white px-4 py-2 rounded-lg shadow-sm border">
-                <span className="text-gray-600">Completed: </span>
+                <span className="text-gray-600">Replied: </span>
                 <span className="font-semibold text-green-600">
                   {submissions.filter(s => s.status === 'completed').length}
                 </span>
@@ -371,13 +371,13 @@ const AdminPage: React.FC = () => {
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg shadow-sm border">
                 <div className="p-4 border-b">
-                  <h2 className="text-lg font-semibold text-gray-900">Contact Submissions</h2>
+                  <h2 className="text-lg font-semibold text-gray-900">Business Emails</h2>
                 </div>
                 <div className="divide-y">
                   {submissions.length === 0 ? (
                     <div className="p-8 text-center">
                       <Mail className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                      <p className="text-gray-500">No submissions yet</p>
+                      <p className="text-gray-500">No emails yet</p>
                     </div>
                   ) : (
                     submissions.map((submission) => (
@@ -396,7 +396,7 @@ const AdminPage: React.FC = () => {
                               {submission.first_name} {submission.last_name}
                             </h3>
                             <span className={`px-2 py-1 text-xs font-medium rounded-full border ${getStatusColor(submission.status)}`}>
-                              {submission.status.replace('_', ' ')}
+                              {submission.status === 'new' ? 'unread' : submission.status === 'in_progress' ? 'read' : 'replied'}
                             </span>
                           </div>
                           <div className="flex items-center gap-2">
@@ -448,11 +448,11 @@ const AdminPage: React.FC = () => {
                 <div className="bg-white rounded-lg shadow-sm border sticky top-4">
                   <div className="p-4 border-b">
                     <div className="flex items-center justify-between">
-                      <h2 className="text-lg font-semibold text-gray-900">Submission Details</h2>
+                      <h2 className="text-lg font-semibold text-gray-900">Email Details</h2>
                       <div className="flex items-center gap-2">
                         {getStatusIcon(selectedSubmission.status)}
                         <span className={`px-2 py-1 text-xs font-medium rounded-full border ${getStatusColor(selectedSubmission.status)}`}>
-                          {selectedSubmission.status.replace('_', ' ')}
+                          {selectedSubmission.status === 'new' ? 'unread' : selectedSubmission.status === 'in_progress' ? 'read' : 'replied'}
                         </span>
                       </div>
                     </div>
@@ -531,9 +531,9 @@ const AdminPage: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Status Update */}
+                    {/* Email Actions */}
                     <div>
-                      <h3 className="font-medium text-gray-900 mb-2">Update Status</h3>
+                      <h3 className="font-medium text-gray-900 mb-2">Email Status</h3>
                       <div className="space-y-2">
                         <button
                           onClick={() => updateSubmissionStatus(selectedSubmission.id, 'new')}
@@ -543,7 +543,7 @@ const AdminPage: React.FC = () => {
                               : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
                           }`}
                         >
-                          Mark as New
+                          Mark as Unread
                         </button>
                         <button
                           onClick={() => updateSubmissionStatus(selectedSubmission.id, 'in_progress')}
@@ -553,7 +553,7 @@ const AdminPage: React.FC = () => {
                               : 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
                           }`}
                         >
-                          Mark as In Progress
+                          Mark as Read
                         </button>
                         <button
                           onClick={() => updateSubmissionStatus(selectedSubmission.id, 'completed')}
@@ -563,7 +563,7 @@ const AdminPage: React.FC = () => {
                               : 'bg-green-100 text-green-700 hover:bg-green-200'
                           }`}
                         >
-                          Mark as Completed
+                          Mark as Replied
                         </button>
                       </div>
                     </div>
@@ -572,17 +572,17 @@ const AdminPage: React.FC = () => {
                     <div className="border-t pt-4">
                       <h3 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
                         <Trash2 className="w-4 h-4 text-red-500" />
-                        Danger Zone
+                        Delete Email
                       </h3>
                       <button
                         onClick={() => deleteSubmission(selectedSubmission.id)}
                         className="w-full px-3 py-2 text-sm bg-red-100 text-red-700 hover:bg-red-200 rounded-lg transition-colors flex items-center justify-center gap-2"
                       >
                         <Trash2 className="w-4 h-4" />
-                        Delete Submission
+                        Delete Email
                       </button>
                       <p className="text-xs text-gray-500 mt-1 text-center">
-                        This action cannot be undone
+                        This email will be permanently deleted
                       </p>
                     </div>
                   </div>
@@ -591,7 +591,7 @@ const AdminPage: React.FC = () => {
                 <div className="bg-white rounded-lg shadow-sm border sticky top-4">
                   <div className="p-8 text-center">
                     <Mail className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">Select a submission to view details</p>
+                    <p className="text-gray-500">Select an email to view details</p>
                   </div>
                 </div>
               )}

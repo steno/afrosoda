@@ -56,8 +56,12 @@ const AdminPage: React.FC = () => {
     e.preventDefault();
     setLoginError('');
 
+    // Trim and normalize inputs
+    const trimmedEmail = loginEmail.trim().toLowerCase();
+    const trimmedPassword = loginPassword.trim();
+
     const isValid = validCredentials.some(
-      cred => cred.email === loginEmail && cred.password === loginPassword
+      cred => cred.email.toLowerCase() === trimmedEmail && cred.password === trimmedPassword
     );
 
     if (isValid) {
@@ -67,6 +71,7 @@ const AdminPage: React.FC = () => {
       setLoginPassword('');
     } else {
       setLoginError('Invalid email or password');
+      console.log('Login attempt failed:', { trimmedEmail, trimmedPassword }); // Debug log
     }
   };
 

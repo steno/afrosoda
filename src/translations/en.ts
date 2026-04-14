@@ -34,11 +34,6 @@ export const en: Translation = {
   products: {
     title: 'Taste the Beat',
     bottles: {
-      cosmicCola: {
-        name: 'Cosmic Cola',
-        description: 'Experience the unique cosmic spark of original AfroSoda Cola. Each sip delivers an explosion of flavor that awakens your senses and sets your taste buds dancing.',
-        features: ['Extra Caffeine and less carbon dioxide', '100% Vegan, Gluten free, Lactose free'],
-      },
       goldenHibiscus: {
         name: 'Golden Hibiscus',
         description: 'Delight in the flowery bloom of Hibiscus with a subtle breeze of ginger to create an oceanic symphony of flavors for your soul.',

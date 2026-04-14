@@ -10,7 +10,7 @@ import Hero from './components/sections/Hero';
 import ProductShowcase from './components/sections/ProductShowcase';
 import CallToAction from './components/sections/CallToAction';
 import Footer from './components/layout/Footer';
-import { bottles } from './data/bottles';
+import { bottles, DEFAULT_HOME_SCROLL_BG } from './data/bottles';
 
 function App() {
   const { language } = useLanguage();
@@ -24,7 +24,6 @@ function App() {
 
   // Create refs for bottle sounds
   const bottleSoundsRef = useRef<{ [key: string]: HTMLAudioElement | null }>({
-    cosmicCola: null,
     goldenHibiscus: null,
     kinkyCocomut: null,
     magicMango: null,
@@ -34,7 +33,6 @@ function App() {
   // Create refs for each product section
   const productSectionRef = useRef<HTMLElement>(null);
   const productRefs = useRef<{ [key: string]: HTMLDivElement | null }>({
-    cosmicCola: null,
     goldenHibiscus: null,
     kinkyCocomut: null,
     magicMango: null,
@@ -62,7 +60,6 @@ function App() {
   useEffect(() => {
     if (!soundsInitialized) {
       bottleSoundsRef.current = {
-        cosmicCola: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/cowbell-sharp-hit-3.wav'),
         goldenHibiscus: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/cowbell-sharp-hit-2.wav'),
         kinkyCocomut: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/cowbell-sharp-hit-3.wav'),
         magicMango: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/cowbell-sharp-hit-4.wav'),
@@ -231,17 +228,19 @@ function App() {
 
   // Get the current active bottle's gradient
   const getActiveGradient = () => {
-    if (!activeProductKey) return 'from-purple-600 via-pink-500 to-orange-500';
+    if (!activeProductKey) return DEFAULT_HOME_SCROLL_BG;
     const activeBottle = bottles.find(bottle => bottle.key === activeProductKey);
-    return activeBottle?.gradientBg || 'from-purple-600 via-pink-500 to-orange-500';
+    return activeBottle?.gradientBg || DEFAULT_HOME_SCROLL_BG;
   };
 
   return (
     <AnimationProvider>
-      <div className="min-h-screen mytexture from-purple-600 via-pink-500 to-orange-500 text-white overflow-hidden relative">
+      <div
+        className={`min-h-screen mytexture ${DEFAULT_HOME_SCROLL_BG} text-white overflow-hidden relative`}
+      >
         {/* Dynamic Background Gradient */}
         <div
-          className={`absolute inset-0 bg-gradient-to-b transition-colors duration-1000 ease-in-out ${getActiveGradient()}`}
+          className={`absolute inset-0 transition-colors duration-1000 ease-in-out ${getActiveGradient()}`}
           style={{ zIndex: -1 }}
         />
 

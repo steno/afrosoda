@@ -80,7 +80,7 @@ const Hero: React.FC<HeroProps> = ({
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="text-center mb-2 md:mb-8"
+            className="text-center mt-2 md:mt-16"
           >
             <motion.h1
               animate={{

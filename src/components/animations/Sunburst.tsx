@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
-import { useEffect } from 'react';
+import { useAnimationContext } from '../../context/AnimationContext';
 
 const RAY_COUNT = 36;
 const RAY_COLORS = ['#ffcc00', '#f5821f'];
@@ -19,6 +19,29 @@ const conicGradient = `conic-gradient(from 180deg at 50% 100%, ${buildConicStops
 
 const Sunburst: React.FC = () => {
   const controls = useAnimationControls();
+  const { registerSunburstReplay } = useAnimationContext();
+
+  const replay = useCallback((reveal: boolean) => {
+    if (reveal) {
+      controls.stop();
+      controls.set({ clipPath: 'circle(0% at 50% 100%)' });
+      requestAnimationFrame(() => {
+        controls.start({
+          clipPath: 'circle(150% at 50% 100%)',
+          transition: { clipPath: { duration: 5.4, ease: 'easeOut' } },
+        });
+      });
+    } else {
+      controls.start({
+        clipPath: 'circle(0% at 50% 100%)',
+        transition: { clipPath: { duration: 1.5, ease: 'easeIn' } },
+      });
+    }
+  }, [controls]);
+
+  useEffect(() => {
+    registerSunburstReplay(replay);
+  }, [registerSunburstReplay, replay]);
 
   useEffect(() => {
     controls.start({

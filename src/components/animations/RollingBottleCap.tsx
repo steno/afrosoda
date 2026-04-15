@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { useAnimationContext } from '../../context/AnimationContext';
 import { useAudio } from '../../context/AudioContext';
 
@@ -7,7 +7,7 @@ const RollingBottleCap: React.FC = () => {
   const controls = useAnimation();
   const ref = useRef<HTMLDivElement>(null);
   const [direction, setDirection] = useState<'left' | 'right'>(Math.random() > 0.5 ? 'left' : 'right');
-  const { toggleAnimations } = useAnimationContext();
+  const { isAnimationEnabled, toggleAnimations, replaySunburst } = useAnimationContext();
   const { toggleSound } = useAudio();
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [isHovering, setIsHovering] = useState(false);
@@ -30,23 +30,22 @@ const RollingBottleCap: React.FC = () => {
   const leftBound = 0;
   const rightBound = viewportWidth - bottleCapWidth;
 
-  const variants = {
+  const wrapperVariants = {
     animate: (dir: 'left' | 'right') => ({
       x: dir === 'left' ? leftBound : rightBound,
-      rotate: dir === 'left' ? -1080 : 1080,
-      transition: {
-        x: {
-          duration: 5,
-          ease: 'linear',
-        },
-        rotate: {
-          duration: 5,
-          ease: 'linear',
-        },
-      },
+      transition: { x: { duration: 5, ease: 'linear' } },
     }),
     initial: (dir: 'left' | 'right') => ({
       x: dir === 'left' ? rightBound : leftBound,
+    }),
+  };
+
+  const imageVariants = {
+    animate: (dir: 'left' | 'right') => ({
+      rotate: dir === 'left' ? -1080 : 1080,
+      transition: { rotate: { duration: 5, ease: 'linear' } },
+    }),
+    initial: () => ({
       rotate: 0,
     }),
   };
@@ -90,12 +89,16 @@ const RollingBottleCap: React.FC = () => {
   };
 
   const handleClick = () => {
+    const willReveal = !isAnimationEnabled;
+    replaySunburst(willReveal);
     toggleAnimations();
     toggleSound();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    sound.current.play().catch(error => console.error('Error playing sound:', error));
+    if (willReveal) {
+      sound.current.play().catch(error => console.error('Error playing sound:', error));
+    }
     setIsHovering(true);
     controls.stop();
     timeoutRef.current = setTimeout(() => {
@@ -107,7 +110,7 @@ const RollingBottleCap: React.FC = () => {
     <motion.div
       ref={ref}
       custom={direction}
-      variants={variants}
+      variants={wrapperVariants}
       initial="initial"
       animate={controls}
       className="absolute -bottom-10 w-32 h-32 cursor-pointer"
@@ -120,11 +123,36 @@ const RollingBottleCap: React.FC = () => {
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
     >
-      <img
-        src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/game-cork.png"
-        alt="Rolling Bottle Cap"
+      <motion.div
+        custom={direction}
+        variants={imageVariants}
+        initial="initial"
+        animate={controls}
         className="w-full h-full"
-      />
+      >
+        <img
+          src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/game-cork.png"
+          alt="Rolling Bottle Cap"
+          className="w-full h-full"
+        />
+      </motion.div>
+      <AnimatePresence>
+        {isHovering && (
+          <motion.div
+            role="tooltip"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 text-white text-sm px-3 py-1.5 rounded-lg whitespace-nowrap z-50"
+          >
+            Toggle the Beat
+            <div
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-black/90"
+              aria-hidden="true"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };

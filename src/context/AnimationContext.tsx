@@ -1,27 +1,37 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, useRef, useCallback, ReactNode } from 'react';
 
-// Define the shape of the animation context
 interface AnimationContextType {
   isAnimationEnabled: boolean;
   toggleAnimations: () => void;
+  registerSunburstReplay: (fn: (reveal: boolean) => void) => void;
+  replaySunburst: (reveal: boolean) => void;
 }
 
-// Create the context with a default value
 const AnimationContext = createContext<AnimationContextType>({
-  isAnimationEnabled: false, // Changed to false to match initial state
-  toggleAnimations: () => {}
+  isAnimationEnabled: false,
+  toggleAnimations: () => {},
+  registerSunburstReplay: () => {},
+  replaySunburst: () => {},
 });
 
-// Provider component to wrap the entire app
 export const AnimationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [isAnimationEnabled, setIsAnimationEnabled] = useState(false); // Changed to false
+  const [isAnimationEnabled, setIsAnimationEnabled] = useState(false);
+  const sunburstReplayRef = useRef<((reveal: boolean) => void) | null>(null);
 
   const toggleAnimations = () => {
     setIsAnimationEnabled(prev => !prev);
   };
 
+  const registerSunburstReplay = useCallback((fn: (reveal: boolean) => void) => {
+    sunburstReplayRef.current = fn;
+  }, []);
+
+  const replaySunburst = useCallback((reveal: boolean) => {
+    sunburstReplayRef.current?.(reveal);
+  }, []);
+
   return (
-    <AnimationContext.Provider value={{ isAnimationEnabled, toggleAnimations }}>
+    <AnimationContext.Provider value={{ isAnimationEnabled, toggleAnimations, registerSunburstReplay, replaySunburst }}>
       {children}
     </AnimationContext.Provider>
   );

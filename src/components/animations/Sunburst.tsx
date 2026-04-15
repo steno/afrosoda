@@ -24,10 +24,8 @@ const Sunburst: React.FC = () => {
     const run = async () => {
       await controls.start({
         clipPath: 'circle(150% at 50% 100%)',
-        rotate: 0,
         transition: {
           clipPath: { duration: 5.4, ease: 'easeOut' },
-          rotate: { duration: 5.4, ease: 'easeOut' },
         },
       });
 
@@ -56,7 +54,7 @@ const Sunburst: React.FC = () => {
         }}
         initial={{
           clipPath: 'circle(0% at 50% 100%)',
-          rotate: -180,
+          rotate: 0,
         }}
         animate={controls}
       />

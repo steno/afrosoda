@@ -21,28 +21,18 @@ const Sunburst: React.FC = () => {
   const controls = useAnimationControls();
 
   useEffect(() => {
-    const run = async () => {
-      await controls.start({
-        clipPath: 'circle(150% at 50% 100%)',
-        transition: {
-          clipPath: { duration: 5.4, ease: 'easeOut' },
-        },
-      });
-
-      controls.start({
-        rotate: 360,
-        transition: {
-          rotate: { duration: 120, ease: 'linear', repeat: Infinity },
-        },
-      });
-    };
-    run();
+    controls.start({
+      clipPath: 'circle(150% at 50% 100%)',
+      transition: {
+        clipPath: { duration: 5.4, ease: 'easeOut' },
+      },
+    });
   }, [controls]);
 
   return (
     <div
       className="absolute inset-0 overflow-hidden pointer-events-none"
-      style={{ zIndex: 0 }}
+      style={{ zIndex: 6 }}
     >
       {/* Rays — radial reveal then continuous rotation */}
       <motion.div

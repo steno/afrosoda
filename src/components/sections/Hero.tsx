@@ -94,7 +94,8 @@ const Hero: React.FC<HeroProps> = ({
                   : 0,
               }}
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-              className="text-xl md:text-3xl font-light"
+              className="text-xl md:text-3xl font-normal"
+              style={{ color: '#cb2626' }}
             >
               {hoveredBottle ? t('products', 'bottles', hoveredBottle as keyof typeof t.products.bottles).name : t('hero', 'title')}
             </motion.p>
@@ -156,7 +157,7 @@ const Hero: React.FC<HeroProps> = ({
               transition={{ delay: 0.2 }}
               className="mt-4 text-center"
             >
-              <p className="text-xl font-medium">
+              <p className="text-xl font-medium" style={{ color: '#cb2626' }}>
                 {t('products', 'bottles', bottles[currentBottleIndex].key as keyof typeof t.products.bottles).name}
               </p>
             </motion.div>
@@ -209,6 +210,7 @@ const Hero: React.FC<HeroProps> = ({
                   initial={{ opacity: 0, y: 10 }}
                   whileHover={{ opacity: 1, y: 0 }}
                   className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-sm font-medium"
+                  style={{ color: '#cb2626' }}
                 >
                   {t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
                 </motion.div>

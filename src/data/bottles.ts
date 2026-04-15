@@ -8,7 +8,7 @@ export const BRAND_COLORS = {
 
 /** Warm sunburst-style fallback when no product is active. */
 export const DEFAULT_HOME_SCROLL_BG =
-  'bg-[linear-gradient(180deg,#c91713_0%,#f5821f_35%,#ffcc00_100%)]';
+  'bg-[linear-gradient(180deg,#8b0f0d_0%,#c91713_20%,#f5821f_45%,#ffcc00_75%,#ffe566_100%)]';
 
 export const bottles = [
   {

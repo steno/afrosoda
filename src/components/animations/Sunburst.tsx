@@ -26,8 +26,8 @@ const Sunburst: React.FC = () => {
         clipPath: 'circle(150% at 50% 100%)',
         rotate: 0,
         transition: {
-          clipPath: { duration: 1.8, ease: 'easeOut' },
-          rotate: { duration: 1.8, ease: 'easeOut' },
+          clipPath: { duration: 5.4, ease: 'easeOut' },
+          rotate: { duration: 5.4, ease: 'easeOut' },
         },
       });
 

@@ -67,10 +67,12 @@ const Hero: React.FC<HeroProps> = ({
       <Sunburst />
 
       {/* Animated Bubbles and Rolling Bottle Cap */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-20">
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[5]">
         {bubbles.map((bubble, i) => (
           <Bubble key={i} {...bubble} />
         ))}
+      </div>
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-20">
         <RollingBottleCap />
       </div>
       
@@ -91,7 +93,7 @@ const Hero: React.FC<HeroProps> = ({
               transition={{ delay: 0.5, duration: 0.8 }}
               className="text-2xl md:text-3xl font-light"
             >
-              {hoveredBottle ? t('products', 'bottles', hoveredBottle as keyof typeof t.products.bottles).name : t('hero', 'subtitle')}
+              {hoveredBottle ? t('products', 'bottles', hoveredBottle as keyof typeof t.products.bottles).name : '\u00A0'}
             </motion.p>
           </motion.div>
         </div>

@@ -83,7 +83,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
                 >
                   <h3 
                     id={`product-title-${bottle.key}`}
-                    className="text-3xl font-bold mb-4 font-heading"
+                    className="text-3xl font-bold mb-4 font-heading bg-gradient-to-r from-[#ffcc00] via-[#f9a825] to-[#ffcc00] bg-clip-text text-transparent inline-block"
                   >
                     {t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
                   </h3>

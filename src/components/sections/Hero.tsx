@@ -85,15 +85,18 @@ const Hero: React.FC<HeroProps> = ({
             className="text-center mb-6 md:mb-8"
           >
             <h2 className="text-5xl md:text-6xl font-extrabold mb-6 font-heading">
-              {t('hero', 'title')}
+              {t('hero', 'subtitle')}
             </h2>
             <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
+              animate={{
+                x: hoveredBottle
+                  ? (bottles.findIndex(b => b.key === hoveredBottle) - (bottles.length - 1) / 2) * 280
+                  : 0,
+              }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
               className="text-2xl md:text-3xl font-light"
             >
-              {hoveredBottle ? t('products', 'bottles', hoveredBottle as keyof typeof t.products.bottles).name : '\u00A0'}
+              {hoveredBottle ? t('products', 'bottles', hoveredBottle as keyof typeof t.products.bottles).name : t('hero', 'title')}
             </motion.p>
           </motion.div>
         </div>

@@ -6,11 +6,12 @@ import { useLanguage } from '../context/LanguageContext';
 interface ExternalLinkProps {
   href: string;
   className?: string;
+  style?: React.CSSProperties;
   children: React.ReactNode;
   ariaLabel?: string;
 }
 
-const ExternalLink: React.FC<ExternalLinkProps> = ({ href, className = '', children, ariaLabel }) => {
+const ExternalLink: React.FC<ExternalLinkProps> = ({ href, className = '', style, children, ariaLabel }) => {
   const { language } = useLanguage();
   const [showTooltip, setShowTooltip] = React.useState(false);
   const tooltipId = React.useId();
@@ -33,6 +34,7 @@ const ExternalLink: React.FC<ExternalLinkProps> = ({ href, className = '', child
         target="_blank"
         rel="noopener noreferrer"
         className={`${className} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500`}
+        style={style}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         onFocus={() => setShowTooltip(true)}

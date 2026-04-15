@@ -58,17 +58,13 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
               {/* Bottle Display */}
               <div className="w-full md:w-1/2 flex justify-center">
                 <motion.div 
-                  className="w-full max-w-[600px] aspect-square relative overflow-hidden rounded-3xl"
+                  className="w-full max-w-[600px] aspect-square relative overflow-hidden rounded-2xl"
                   whileHover={{ scale: 1.05 }}
                 >
                   <img 
                     src={bottle.showcaseImage} 
                     alt={t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
                     className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div 
-                    className={`absolute inset-0 bg-gradient-to-t ${bottle.color} mix-blend-overlay opacity-30`}
-                    aria-hidden="true"
                   />
                 </motion.div>
               </div>
@@ -79,22 +75,24 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
                   initial={{ x: index % 2 === 0 ? 50 : -50, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="bg-black/20 backdrop-blur-lg rounded-3xl p-8"
+                  className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 text-gray-800"
                 >
                   <h3 
                     id={`product-title-${bottle.key}`}
-                    className="text-3xl font-bold mb-4 font-heading bg-gradient-to-r from-[#ffcc00] via-[#f9a825] to-[#ffcc00] bg-clip-text text-transparent inline-block"
+                    className="text-3xl font-bold mb-4 font-heading"
+                    style={{ color: bottle.buttonColor }}
                   >
                     {t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
                   </h3>
-                  <p className="text-lg mb-6 opacity-90">
+                  <p className="text-lg mb-6 text-gray-700">
                     {t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).description}
                   </p>
                   
                   {/* Order Now Button */}
                   <ExternalLink
                     href={bottle.link}
-                    className={`mb-8 inline-flex items-center gap-2 bg-gradient-to-r ${bottle.color} text-white px-6 py-3 rounded-full font-bold hover:shadow-lg transition-all font-heading`}
+                    className="mb-8 inline-flex items-center gap-2 text-white px-6 py-3 rounded-full font-bold hover:shadow-lg transition-all font-heading"
+                    style={{ backgroundColor: bottle.buttonColor }}
                     ariaLabel={`${language === 'en' ? 'Order' : 'Bestelle'} ${t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}`}
                   >
                     <ShoppingCart className="w-5 h-5" aria-hidden="true" />
@@ -107,8 +105,8 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
                   >
                     {t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).features.map((feature, i) => (
                       <li key={i} className="flex items-center gap-2">
-                        <span className="w-5 h-5 text-yellow-300" aria-hidden="true">•</span>
-                        <span>{feature}</span>
+                        <span className="w-5 h-5 text-[#f5821f]" aria-hidden="true">•</span>
+                        <span className="text-gray-700">{feature}</span>
                       </li>
                     ))}
                   </ul>

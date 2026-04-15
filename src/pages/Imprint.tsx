@@ -47,14 +47,13 @@ const ImprintPage: React.FC = () => {
   return (
     <SimpleLayout>
       {/* Hero Section */}
-      <section className="relative py-20 bg-purple text-white overflow-hidden">
+      <section className="relative py-20 bg-[linear-gradient(180deg,#ffcc00_0%,#f5821f_70%,#c91713_100%)] text-white overflow-hidden">
         {/* Animated Bubbles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {heroBubbles.map((bubble, i) => (
             <Bubble key={`hero-bubble-${i}`} {...bubble} />
           ))}
         </div>
-        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <motion.h1 
             initial={{ y: 50, opacity: 0 }}

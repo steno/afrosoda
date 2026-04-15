@@ -169,7 +169,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-purple text-white backdrop-blur-md rounded-xl p-6 md:p-8 shadow-lg">
+    <div className="max-w-2xl mx-auto bg-white text-gray-800 rounded-xl p-6 md:p-8 shadow-lg">
       {/*<h2 className="text-2xl font-bold mb-6 font-heading">
         {language === 'en' ? 'Contact Us' : 'Kontaktieren Sie uns'}
       </h2>*/}
@@ -219,9 +219,9 @@ const ContactForm: React.FC = () => {
               name="businessType"
               value={formData.businessType}
               onChange={handleChange}
-              className={`w-full px-4 py-2 bg-white/10 border ${
-                errors.businessType ? 'border-red-500' : 'border-white/20'
-              } rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white`}
+              className={`w-full px-4 py-2 bg-gray-50 border ${
+                errors.businessType ? 'border-red-500' : 'border-gray-300'
+              } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5821f] text-gray-800`}
             >
               {businessTypes.map(type => (
                 <option key={type.value} value={type.value} className="bg-gray-800">
@@ -245,9 +245,9 @@ const ContactForm: React.FC = () => {
               name="company"
               value={formData.company}
               onChange={handleChange}
-              className={`w-full px-4 py-2 bg-white/10 border ${
-                errors.company ? 'border-red-500' : 'border-white/20'
-              } rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500`}
+              className={`w-full px-4 py-2 bg-gray-50 border ${
+                errors.company ? 'border-red-500' : 'border-gray-300'
+              } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5821f]`}
             />
             {errors.company && (
               <p className="mt-1 text-red-500 text-sm">{errors.company}</p>
@@ -265,9 +265,9 @@ const ContactForm: React.FC = () => {
               name="street"
               value={formData.street}
               onChange={handleChange}
-              className={`w-full px-4 py-2 bg-white/10 border ${
-                errors.street ? 'border-red-500' : 'border-white/20'
-              } rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500`}
+              className={`w-full px-4 py-2 bg-gray-50 border ${
+                errors.street ? 'border-red-500' : 'border-gray-300'
+              } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5821f]`}
             />
             {errors.street && (
               <p className="mt-1 text-red-500 text-sm">{errors.street}</p>
@@ -285,9 +285,9 @@ const ContactForm: React.FC = () => {
                 name="postalCode"
                 value={formData.postalCode}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 bg-white/10 border ${
-                  errors.postalCode ? 'border-red-500' : 'border-white/20'
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500`}
+                className={`w-full px-4 py-2 bg-gray-50 border ${
+                  errors.postalCode ? 'border-red-500' : 'border-gray-300'
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5821f]`}
               />
               {errors.postalCode && (
                 <p className="mt-1 text-red-500 text-sm">{errors.postalCode}</p>
@@ -304,9 +304,9 @@ const ContactForm: React.FC = () => {
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 bg-white/10 border ${
-                  errors.city ? 'border-red-500' : 'border-white/20'
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500`}
+                className={`w-full px-4 py-2 bg-gray-50 border ${
+                  errors.city ? 'border-red-500' : 'border-gray-300'
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5821f]`}
               />
               {errors.city && (
                 <p className="mt-1 text-red-500 text-sm">{errors.city}</p>
@@ -326,9 +326,9 @@ const ContactForm: React.FC = () => {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 bg-white/10 border ${
-                  errors.firstName ? 'border-red-500' : 'border-white/20'
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500`}
+                className={`w-full px-4 py-2 bg-gray-50 border ${
+                  errors.firstName ? 'border-red-500' : 'border-gray-300'
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5821f]`}
               />
               {errors.firstName && (
                 <p className="mt-1 text-red-500 text-sm">{errors.firstName}</p>
@@ -345,9 +345,9 @@ const ContactForm: React.FC = () => {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 bg-white/10 border ${
-                  errors.lastName ? 'border-red-500' : 'border-white/20'
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500`}
+                className={`w-full px-4 py-2 bg-gray-50 border ${
+                  errors.lastName ? 'border-red-500' : 'border-gray-300'
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5821f]`}
               />
               {errors.lastName && (
                 <p className="mt-1 text-red-500 text-sm">{errors.lastName}</p>
@@ -367,7 +367,7 @@ const ContactForm: React.FC = () => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5821f]"
               />
             </div>
             
@@ -381,9 +381,9 @@ const ContactForm: React.FC = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 bg-white/10 border ${
-                  errors.email ? 'border-red-500' : 'border-white/20'
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500`}
+                className={`w-full px-4 py-2 bg-gray-50 border ${
+                  errors.email ? 'border-red-500' : 'border-gray-300'
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5821f]`}
               />
               {errors.email && (
                 <p className="mt-1 text-red-500 text-sm">{errors.email}</p>
@@ -402,7 +402,7 @@ const ContactForm: React.FC = () => {
               value={formData.message}
               onChange={handleChange}
               rows={5}
-              className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f5821f]"
             ></textarea>
           </div>
 
@@ -416,7 +416,7 @@ const ContactForm: React.FC = () => {
                   type="checkbox"
                   checked={formData.marketingConsent}
                   onChange={handleCheckboxChange}
-                  className="w-4 h-4 bg-white/10 border-white/20 rounded focus:ring-yellow-500"
+                  className="w-4 h-4 bg-gray-50 border-gray-300 rounded focus:ring-[#f5821f]"
                 />
               </div>
               <label htmlFor="marketingConsent" className="ml-2 text-sm">
@@ -434,7 +434,7 @@ const ContactForm: React.FC = () => {
                   type="checkbox"
                   checked={formData.privacyConsent}
                   onChange={handleCheckboxChange}
-                  className="w-4 h-4 bg-white/10 border-white/20 rounded focus:ring-yellow-500"
+                  className="w-4 h-4 bg-gray-50 border-gray-300 rounded focus:ring-[#f5821f]"
                 />
               </div>
               <label htmlFor="privacyConsent" className="ml-2 text-sm">

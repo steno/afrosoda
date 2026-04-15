@@ -7,7 +7,7 @@ const RollingBottleCap: React.FC = () => {
   const controls = useAnimation();
   const ref = useRef<HTMLDivElement>(null);
   const [direction, setDirection] = useState<'left' | 'right'>(Math.random() > 0.5 ? 'left' : 'right');
-  const { isAnimationEnabled, toggleAnimations, replaySunburst } = useAnimationContext();
+  const { toggleAnimations } = useAnimationContext();
   const { toggleSound } = useAudio();
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [isHovering, setIsHovering] = useState(false);
@@ -89,16 +89,12 @@ const RollingBottleCap: React.FC = () => {
   };
 
   const handleClick = () => {
-    const willReveal = !isAnimationEnabled;
-    replaySunburst(willReveal);
     toggleAnimations();
     toggleSound();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    if (willReveal) {
-      sound.current.play().catch(error => console.error('Error playing sound:', error));
-    }
+    sound.current.play().catch(error => console.error('Error playing sound:', error));
     setIsHovering(true);
     controls.stop();
     timeoutRef.current = setTimeout(() => {

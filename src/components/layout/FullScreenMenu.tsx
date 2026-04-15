@@ -20,7 +20,7 @@ const FullScreenMenu: React.FC<FullScreenMenuProps> = ({ onClose, t, language })
     >
      
       {/* Colorful gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-600 via-pink-500 to-orange-500" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#f5821f] via-[#d4451f] to-[#c91713]" />
       
       {/* Content with backdrop blur */}
       <div className="relative z-10 h-full flex items-center justify-center">

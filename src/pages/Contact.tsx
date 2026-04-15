@@ -49,14 +49,13 @@ const ContactPage: React.FC = () => {
   return (
     <SimpleLayout>
       {/* Hero Section */}
-      <section className="relative py-20 bg-purple text-white overflow-hidden">
+      <section className="relative py-20 bg-[linear-gradient(180deg,#ffcc00_0%,#f5821f_70%,#c91713_100%)] text-white overflow-hidden">
          {/* Animated Bubbles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
           {heroBubbles.map((bubble, i) => (
             <Bubble key={`hero-bubble-${i}`} {...bubble} />
           ))}
         </div>
-        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <motion.h1 
             initial={{ y: 50, opacity: 0 }}
@@ -109,8 +108,8 @@ const ContactPage: React.FC = () => {
               
               <div className="space-y-8">
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-purple-600" />
+                  <div className="w-12 h-12 bg-[#ffcc00]/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-[#c91713]" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-2 font-heading">
@@ -126,8 +125,8 @@ const ContactPage: React.FC = () => {
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                    <Mail className="w-6 h-6 text-purple-600" />
+                  <div className="w-12 h-12 bg-[#ffcc00]/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                    <Mail className="w-6 h-6 text-[#c91713]" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-2 font-heading">
@@ -138,8 +137,8 @@ const ContactPage: React.FC = () => {
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                    <Phone className="w-6 h-6 text-purple-600" />
+                  <div className="w-12 h-12 bg-[#ffcc00]/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                    <Phone className="w-6 h-6 text-[#c91713]" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-2 font-heading">
@@ -150,8 +149,8 @@ const ContactPage: React.FC = () => {
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                    <MessageSquare className="w-6 h-6 text-purple-600" />
+                  <div className="w-12 h-12 bg-[#ffcc00]/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                    <MessageSquare className="w-6 h-6 text-[#c91713]" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-2 font-heading">
@@ -247,7 +246,7 @@ const ContactPage: React.FC = () => {
               <p className="text-gray-600">
                 {language === 'en'
                   ? 'You can submit a data deletion request through our'
-                  : 'Sie können einen Antrag auf Datenlöschung über unsere'} <a href="/privacy" className="text-purple-600 hover:underline">
+                  : 'Sie können einen Antrag auf Datenlöschung über unsere'} <a href="/privacy" className="text-[#c91713] hover:underline">
                   {language === 'en' ? 'Privacy Policy' : 'Datenschutzerklärung'}
                 </a> {language === 'en'
                   ? 'page. We will process your request within 30 days as required by GDPR regulations.'

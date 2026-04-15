@@ -120,7 +120,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             className="fixed inset-0 z-50"
           >
             {/* Colorful gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-600 via-pink-500 to-orange-500" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#f5821f] via-[#d4451f] to-[#c91713]" />
             
             {/* Animated floating bubbles */}
             <div className="absolute inset-0 overflow-hidden">

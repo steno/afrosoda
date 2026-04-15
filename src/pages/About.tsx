@@ -71,9 +71,9 @@ const AboutPage: React.FC = () => {
 
   // Map value icons to Lucide components
   const valueIcons = [
-    <Globe className="w-8 h-8 text-purple-600" />,
-    <Leaf className="w-8 h-8 text-green-600" />,
-    <Music className="w-8 h-8 text-pink-600" />,
+    <Globe className="w-8 h-8 text-[#c91713]" />,
+    <Leaf className="w-8 h-8 text-[#f5821f]" />,
+    <Music className="w-8 h-8 text-[#c91713]" />,
   ];
 
   // Generate bubbles for the hero section
@@ -93,13 +93,12 @@ const AboutPage: React.FC = () => {
   return (
     <SimpleLayout>
       {/* Hero Section with Bubbles */}
-      <section className="relative py-20 bg-purple text-white overflow-hidden">
+      <section className="relative py-20 bg-[linear-gradient(180deg,#ffcc00_0%,#f5821f_70%,#c91713_100%)] text-white overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
           {heroBubbles.map((bubble, i) => (
             <Bubble key={`hero-bubble-${i}`} {...bubble} />
           ))}
         </div>
-        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 max-w-7xl mx-auto px-4">
           <motion.h1
             initial={{ y: 50, opacity: 0 }}
@@ -127,7 +126,7 @@ const AboutPage: React.FC = () => {
             <Bubble key={`about-bubble-${i}`} {...bubble} />
           ))}
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-50 to-white opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#ffcc00]/10 to-white opacity-50" />
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -144,8 +143,8 @@ const AboutPage: React.FC = () => {
                   className="w-full h-auto"
                 />
               </div>
-              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full -z-10" />
-              <div className="absolute -top-10 -left-10 w-24 h-24 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full -z-10" />
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-gradient-to-br from-[#ffcc00] to-[#f5821f] rounded-full -z-10" />
+              <div className="absolute -top-10 -left-10 w-24 h-24 bg-gradient-to-br from-[#c91713] to-[#f5821f] rounded-full -z-10" />
             </motion.div>
             <motion.div
               initial={{ x: 100, opacity: 0 }}
@@ -190,7 +189,7 @@ const AboutPage: React.FC = () => {
                   viewport={{ once: true }}
                   className="bg-white p-8 rounded-3xl shadow-lg flex flex-col items-center text-center"
                 >
-                  <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                  <div className="w-16 h-16 bg-[#ffcc00]/20 rounded-2xl flex items-center justify-center mb-6">
                     {valueIcons[index]}
                   </div>
                   <h3 className="text-xl font-bold mb-4 text-gray-800 font-heading">{item.title}</h3>

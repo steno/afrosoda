@@ -32,13 +32,11 @@ const Hero: React.FC<HeroProps> = ({
 
   const nextBottle = () => {
     const nextIndex = (currentBottleIndex + 1) % bottles.length;
-    playBottleSound(bottles[nextIndex].key);
     setCurrentBottleIndex(nextIndex);
   };
 
   const prevBottle = () => {
     const prevIndex = (currentBottleIndex - 1 + bottles.length) % bottles.length;
-    playBottleSound(bottles[prevIndex].key);
     setCurrentBottleIndex(prevIndex);
   };
 
@@ -105,7 +103,26 @@ const Hero: React.FC<HeroProps> = ({
         {/* Mobile Bottle Slider */}
         {isMobile ? (
           <div className="flex flex-col items-center justify-center pb-4 flex-1">
-            <div className="relative w-full max-w-[300px] h-full mx-auto">
+            <div className="relative w-full max-w-[300px] h-full mx-auto overflow-hidden">
+              <div className="absolute inset-0 pointer-events-none">
+                {Array.from({ length: 40 }, (_, i) => {
+                  const size = 4 + Math.random() * 12;
+                  return (
+                    <span
+                      key={i}
+                      className="absolute rounded-full bg-white/50 bubble-rise aspect-square"
+                      style={{
+                        width: size,
+                        height: size,
+                        left: `${Math.random() * 100}%`,
+                        bottom: 0,
+                        animationDelay: `${Math.random() * 3}s`,
+                        animationDuration: `${2 + Math.random() * 3}s`,
+                      }}
+                    />
+                  );
+                })}
+              </div>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentBottleIndex}
@@ -166,10 +183,7 @@ const Hero: React.FC<HeroProps> = ({
               {bottles.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => {
-                    playBottleSound(bottles[index].key);
-                    setCurrentBottleIndex(index);
-                  }}
+                  onClick={() => setCurrentBottleIndex(index)}
                   className={`w-2 h-2 rounded-full ${currentBottleIndex === index ? 'bg-white' : 'bg-white/30'}`}
                   aria-label={`Go to bottle ${index + 1}`}
                 />
@@ -188,12 +202,12 @@ const Hero: React.FC<HeroProps> = ({
                   y: -20,
                   transition: { duration: 0.3 }
                 }}
-                onMouseEnter={() => {
-                  setHoveredBottle(bottle.key);
-                  playBottleSound(bottle.key);
-                }}
+                onMouseEnter={() => setHoveredBottle(bottle.key)}
                 onMouseLeave={() => setHoveredBottle(null)}
-                onClick={() => scrollToProduct(bottle.key)}
+                onClick={() => {
+                  playBottleSound(bottle.key);
+                  scrollToProduct(bottle.key);
+                }}
                 className="relative cursor-pointer group"
               >
                 <motion.div 
@@ -205,6 +219,25 @@ const Hero: React.FC<HeroProps> = ({
                     alt={t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
                     className="absolute inset-0 w-full h-full object-contain"
                   />
+                  <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {Array.from({ length: 60 }, (_, i) => {
+                      const size = 4 + Math.random() * 12;
+                      return (
+                        <span
+                          key={i}
+                          className="absolute rounded-full bg-white/50 bubble-rise aspect-square"
+                          style={{
+                            width: size,
+                            height: size,
+                            left: `${Math.random() * 100}%`,
+                            bottom: 0,
+                            animationDelay: `${Math.random() * 3}s`,
+                            animationDuration: `${2 + Math.random() * 3}s`,
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}

@@ -59,10 +59,10 @@ function App() {
   useEffect(() => {
     if (!soundsInitialized) {
       bottleSoundsRef.current = {
-        goldenHibiscus: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/cowbell-sharp-hit-2.wav'),
-        kinkyCocomut: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/cowbell-sharp-hit-3.wav'),
-        magicMango: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/cowbell-sharp-hit-4.wav'),
-        bubbleBanana: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/cowbell-sharp-hit-3.wav')
+        goldenHibiscus: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/bottleopening.mp3'),
+        kinkyCocomut: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/bottleopening.mp3'),
+        magicMango: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/bottleopening.mp3'),
+        bubbleBanana: new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/bottleopening.mp3')
       };
 
       Object.values(bottleSoundsRef.current).forEach(audio => {

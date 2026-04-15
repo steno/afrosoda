@@ -6,7 +6,7 @@ const CallToAction: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="pt-0 pb-20 px-0 bg-purple">
+    <section className="pt-0 pb-20 px-0 bg-[#5a7a1a]">
         {/* Decorative Pattern Bar */}
       <div className="relative w-full h-12 md:h-12 overflow-hidden">
         <div 

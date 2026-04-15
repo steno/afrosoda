@@ -14,7 +14,7 @@ const Footer: React.FC<FooterProps> = ({ scrollToTop }) => {
   const { t } = useTranslation();
 
   return (
-    <footer className="py-8 px-4 bg-purple text-center text-sm">
+    <footer className="py-8 px-4 bg-[#2d5016] text-center text-sm">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
           <Link to="/" onClick={scrollToTop} className="mb-4 md:mb-0">

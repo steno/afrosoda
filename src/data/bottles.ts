@@ -8,7 +8,7 @@ export const BRAND_COLORS = {
 
 /** Warm sunburst-style fallback when no product is active. */
 export const DEFAULT_HOME_SCROLL_BG =
-  'bg-[linear-gradient(180deg,#8b0f0d_0%,#c91713_20%,#f5821f_45%,#ffcc00_75%,#ffe566_100%)]';
+  'bg-[linear-gradient(180deg,#8b0f0d_0%,#c91713_20%,#f5821f_35%,#ffcc00_50%,#ffe566_62%,#b5cf00_78%,#8aab00_100%)]';
 
 export const bottles = [
   {
@@ -20,16 +20,6 @@ export const bottles = [
     heroImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-hibiscus.png?auto=format&fit=crop&w=800&q=80',
     showcaseImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/hib-detail.png?auto=format&fit=crop&w=1200&h=1200&q=80',
     link: 'https://www.africadrinks.de/golden-hibiskus'  // Hibiscus
-  },
-  {
-    color: 'from-[#b5cf00] to-[#ffcc00]',
-    buttonColor: '#b5cf00',
-    gradientBg:
-      'bg-[linear-gradient(180deg,#8aab00_0%,#b5cf00_45%,#ffcc00_100%)]',
-    key: 'kinkyCocomut',
-    heroImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-coco.png?auto=format&fit=crop&w=800&q=80',
-    showcaseImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/coco-detail.png?auto=format&fit=crop&w=1200&h=1200&q=80',
-    link: 'https://www.africadrinks.de/kinky-coconut'  // Coconut
   },
   {
     color: 'from-[#f5821f] to-[#ffcc00]',
@@ -50,5 +40,15 @@ export const bottles = [
     heroImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-banana.png?auto=format&fit=crop&w=800&q=80',
     showcaseImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/banana-detail.png?auto=format&fit=crop&w=1200&h=1200&q=80',
     link: 'https://www.africadrinks.de/bubble-banana'  // Banana
+  },
+  {
+    color: 'from-[#b5cf00] to-[#ffcc00]',
+    buttonColor: '#b5cf00',
+    gradientBg:
+      'bg-[linear-gradient(180deg,#8aab00_0%,#b5cf00_45%,#ffcc00_100%)]',
+    key: 'kinkyCocomut',
+    heroImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-coco.png?auto=format&fit=crop&w=800&q=80',
+    showcaseImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/coco-detail.png?auto=format&fit=crop&w=1200&h=1200&q=80',
+    link: 'https://www.africadrinks.de/kinky-coconut'  // Coconut
   },
 ];

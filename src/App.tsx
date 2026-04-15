@@ -258,7 +258,7 @@ function App() {
             className="absolute inset-0 bg-repeat-x"
             style={{
               backgroundImage: `url('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/pattern.png')`,
-              backgroundSize: 'auto 55%',
+              backgroundSize: 'auto 80%',
               animation: 'slidePattern 30s linear infinite'
             }}
           />

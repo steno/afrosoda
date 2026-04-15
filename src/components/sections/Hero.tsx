@@ -62,7 +62,7 @@ const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <header className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
+    <header className="relative h-[calc(100vh-25px)] flex flex-col items-center justify-center overflow-hidden">
       {/* Sunburst background (toggled by bottle-cap click) */}
       <Sunburst />
 
@@ -77,14 +77,14 @@ const Hero: React.FC<HeroProps> = ({
       </div>
       
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 flex flex-col justify-between h-full">
-        <div className="pt-20 md:pt-20 flex-1 flex flex-col justify-center">
+        <div className="pt-20 md:pt-20 flex-none md:flex-1 flex flex-col justify-center">
           <motion.div
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="text-center mb-6 md:mb-8"
+            className="text-center mb-2 md:mb-8"
           >
-            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 font-heading">
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-2 md:mb-6 font-heading">
               {t('hero', 'subtitle')}
             </h2>
             <motion.p
@@ -94,7 +94,7 @@ const Hero: React.FC<HeroProps> = ({
                   : 0,
               }}
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-              className="text-2xl md:text-3xl font-light"
+              className="text-xl md:text-3xl font-light"
             >
               {hoveredBottle ? t('products', 'bottles', hoveredBottle as keyof typeof t.products.bottles).name : t('hero', 'title')}
             </motion.p>
@@ -103,8 +103,8 @@ const Hero: React.FC<HeroProps> = ({
 
         {/* Mobile Bottle Slider */}
         {isMobile ? (
-          <div className="flex flex-col items-center justify-center pb-16">
-            <div className="relative w-full max-w-[300px] h-[400px] mx-auto">
+          <div className="flex flex-col items-center justify-center pb-4">
+            <div className="relative w-full max-w-[300px] h-[350px] mx-auto">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentBottleIndex}

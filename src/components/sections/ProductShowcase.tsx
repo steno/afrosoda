@@ -24,6 +24,13 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
     soundRef.current.play().catch(() => {});
   };
 
+  const stopOpenSound = () => {
+    if (soundRef.current) {
+      soundRef.current.pause();
+      soundRef.current.currentTime = 0;
+    }
+  };
+
   return (
     <section 
       className="py-20 relative overflow-hidden"
@@ -64,12 +71,13 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
               className={`group flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 md:gap-16`}
               role="article"
               aria-labelledby={`product-title-${bottle.key}`}
+              onMouseEnter={playOpenSound}
+              onMouseLeave={stopOpenSound}
             >
               {/* Bottle Display */}
               <div className="w-full md:w-1/2 flex justify-center">
                 <div
                   className="w-full max-w-[600px] aspect-square relative overflow-hidden rounded-2xl"
-                  onMouseEnter={playOpenSound}
                 >
                   <motion.img 
                     src={bottle.showcaseImage} 

@@ -82,10 +82,7 @@ const Hero: React.FC<HeroProps> = ({
             transition={{ duration: 1 }}
             className="text-center mb-2 md:mb-8"
           >
-            <h2 className="text-3xl md:text-5xl font-extrabold mb-2 md:mb-6 font-heading">
-              {t('hero', 'subtitle')}
-            </h2>
-            <motion.p
+            <motion.h1
               animate={{
                 x: hoveredBottle
                   ? (bottles.findIndex(b => b.key === hoveredBottle) - (bottles.length - 1) / 2) * 280
@@ -93,10 +90,10 @@ const Hero: React.FC<HeroProps> = ({
               }}
               transition={{ type: 'spring', stiffness: 300, damping: 25 }}
               className="text-xl md:text-3xl font-normal"
-              style={{ color: '#cb2626' }}
+              style={{ color: '#cb2626', fontSize: undefined, lineHeight: undefined }}
             >
               {hoveredBottle ? t('products', 'bottles', hoveredBottle as keyof typeof t.products.bottles).name : t('hero', 'title')}
-            </motion.p>
+            </motion.h1>
           </motion.div>
         </div>
 
@@ -174,9 +171,9 @@ const Hero: React.FC<HeroProps> = ({
               transition={{ delay: 0.2 }}
               className="mt-4 text-center"
             >
-              <p className="text-xl font-medium" style={{ color: '#cb2626' }}>
+              <h1 className="text-xl font-medium" style={{ color: '#cb2626', fontSize: '1.25rem', lineHeight: '1.75rem' }}>
                 {t('products', 'bottles', bottles[currentBottleIndex].key as keyof typeof t.products.bottles).name}
-              </p>
+              </h1>
             </motion.div>
             
             <div className="flex justify-center gap-2 mt-4">
@@ -239,14 +236,14 @@ const Hero: React.FC<HeroProps> = ({
                     })}
                   </div>
                 </motion.div>
-                <motion.div
+                <motion.h1
                   initial={{ opacity: 0, y: 10 }}
                   whileHover={{ opacity: 1, y: 0 }}
                   className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-sm font-medium"
-                  style={{ color: '#cb2626' }}
+                  style={{ color: '#cb2626', fontSize: '0.875rem', lineHeight: '1.25rem' }}
                 >
                   {t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
-                </motion.div>
+                </motion.h1>
               </motion.div>
             ))}
           </div>

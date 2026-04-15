@@ -79,9 +79,9 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
                 className="flex items-center"
               >
                 <Link to="/" onClick={scrollToTop}>
-                  <img src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/logolight.png" 
+                  <img src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/logolight.png"
                     alt="AfroSoda Logo"
-                    className="h-8"
+                    className="h-12"
                   />
                 </Link>
               </motion.div>

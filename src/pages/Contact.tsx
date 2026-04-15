@@ -97,7 +97,7 @@ const ContactPage: React.FC = () => {
       </div>*/}
 
       {/* Contact Information and Form */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 [&_h1]:text-black [&_h2]:text-black [&_h3]:text-black [&_h4]:text-black [&_h5]:text-black [&_h6]:text-black">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
@@ -199,7 +199,7 @@ const ContactPage: React.FC = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 px-4 bg-gray-50">
+      <section className="py-16 px-4 bg-gray-50 [&_h1]:text-black [&_h2]:text-black [&_h3]:text-black [&_h4]:text-black [&_h5]:text-black [&_h6]:text-black">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12 font-heading">
             {language === 'en' ? 'Frequently Asked Questions' : 'Häufig gestellte Fragen'}

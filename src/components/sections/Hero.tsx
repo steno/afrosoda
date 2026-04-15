@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -29,6 +29,7 @@ const Hero: React.FC<HeroProps> = ({
 }) => {
   const { language } = useLanguage();
   const { t } = useTranslation();
+  const initialMount = useRef(true);
 
   const nextBottle = () => {
     const nextIndex = (currentBottleIndex + 1) % bottles.length;
@@ -126,7 +127,8 @@ const Hero: React.FC<HeroProps> = ({
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: initialMount.current ? 0.5 : 0.3, delay: initialMount.current ? 2 : 0 }}
+                  onAnimationComplete={() => { initialMount.current = false; }}
                   className="absolute inset-0 flex items-center justify-center"
                 >
                   <img 
@@ -168,7 +170,7 @@ const Hero: React.FC<HeroProps> = ({
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: initialMount.current ? 2.5 : 0 }}
               className="mt-4 text-center"
             >
               <h1 className="text-xl font-medium" style={{ color: '#cb2626', fontSize: '1.25rem', lineHeight: '1.75rem' }}>
@@ -194,7 +196,7 @@ const Hero: React.FC<HeroProps> = ({
                 key={bottle.key}
                 initial={{ y: 100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: index * 0.2, duration: 0.8 }}
+                transition={{ delay: 2 + index * 0.2, duration: 0.8 }}
                 whileHover={{ 
                   y: -20,
                   transition: { duration: 0.3 }

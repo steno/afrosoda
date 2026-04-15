@@ -103,8 +103,8 @@ const Hero: React.FC<HeroProps> = ({
 
         {/* Mobile Bottle Slider */}
         {isMobile ? (
-          <div className="flex flex-col items-center justify-center pb-4">
-            <div className="relative w-full max-w-[300px] h-[350px] mx-auto">
+          <div className="flex flex-col items-center justify-center pb-4 flex-1">
+            <div className="relative w-full max-w-[300px] h-full mx-auto">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentBottleIndex}

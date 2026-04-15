@@ -23,7 +23,13 @@
     background-image: radial-gradient(var(--tw-gradient-stops));
   }
 }
-h1 {font-style:italic;}
+
+h1, h2, h3, h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  text-transform: uppercase;
+  color: #c91713;
+  font-weight: 800;
+}
 
 @keyframes slidePattern {
   0% {
@@ -34,20 +40,31 @@ h1 {font-style:italic;}
   }
 }
 
-.from-purple-600 {
-    --tw-gradient-from: purple var(--tw-gradient-from-position);}
-
 .bg-purple {
     background-color: #c91713;
 }
 
 
-.mytexture {
-  background-image: url(https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/clean-gray-paper2.png);
-  background-attachment: fixed;
-  }
 
 .italic {font-style:italic;}
+
+@keyframes bubbleRise {
+  0%   { transform: translateY(0) translateX(0); opacity: 0.6; }
+  50%  { transform: translateY(-50vh) translateX(var(--drift, 30px)); opacity: 0.8; }
+  100% { transform: translateY(-110vh) translateX(0); opacity: 0; }
+}
+.bubble-rise {
+  animation: bubbleRise linear infinite;
+}
+
+/* Sunburst halftone dot overlay */
+.sunburst-halftone {
+  background-image: radial-gradient(circle, rgba(201,23,19,0.38) 28%, transparent 29%);
+  background-size: 14px 14px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 100%, transparent 15%, black 70%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 100%, transparent 15%, black 70%);
+  opacity: 0.45;
+}
 
 .border-red-500 {
     --tw-border-opacity: 1;

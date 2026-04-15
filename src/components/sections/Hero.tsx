@@ -4,8 +4,8 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { useLanguage } from '../../context/LanguageContext';
 import Bubble from '../animations/Bubble';
-import RadialGradient from '../animations/RadialGradient';
 import RollingBottleCap from '../animations/RollingBottleCap';
+import Sunburst from '../animations/Sunburst';
 import { bottles } from '../../data/bottles';
 
 interface HeroProps {
@@ -42,21 +42,11 @@ const Hero: React.FC<HeroProps> = ({
     setCurrentBottleIndex(prevIndex);
   };
 
-  const bubbles = Array.from({ length: 15 }, (_, i) => ({
-    delay: i * 2,
-    size: 50 + Math.random() * 100,
-    x: (i % 5) * (window.innerWidth / 5) + Math.random() * 100 - 50,
+  const bubbles = Array.from({ length: 150 }, (_, i) => ({
+    delay: i * 0.2,
+    size: 6 + Math.random() * 28,
+    x: Math.random() * window.innerWidth,
   }));
-
-  const radialGradients = [
-    { color: 'bg-purple-500/50', size: 1000, x: -300, y: -150, duration: 25, delay: 0, opacity: 0.6 },
-    { color: 'bg-pink-500/50', size: 800, x: 400, y: 200, duration: 20, delay: 5, opacity: 0.5 },
-    { color: 'bg-yellow-500/40', size: 700, x: -150, y: 300, duration: 30, delay: 10, opacity: 0.4 },
-    { color: 'bg-blue-500/40', size: 900, x: 250, y: -250, duration: 22, delay: 7, opacity: 0.45 },
-    { color: 'bg-green-500/30', size: 750, x: -350, y: 150, duration: 28, delay: 3, opacity: 0.35 },
-    { color: 'bg-orange-500/40', size: 850, x: 300, y: 300, duration: 26, delay: 8, opacity: 0.4 },
-    { color: 'bg-indigo-500/40', size: 950, x: -200, y: -300, duration: 24, delay: 12, opacity: 0.45 },
-  ];
 
   const handleBottleClick = () => {
     const bottleKey = bottles[currentBottleIndex].key;
@@ -73,8 +63,9 @@ const Hero: React.FC<HeroProps> = ({
 
   return (
     <header className="relative h-screen flex flex-col items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-black/40" />
-      
+      {/* Sunburst background (toggled by bottle-cap click) */}
+      <Sunburst />
+
       {/* Animated Bubbles and Rolling Bottle Cap */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-20">
         {bubbles.map((bubble, i) => (
@@ -91,7 +82,7 @@ const Hero: React.FC<HeroProps> = ({
             transition={{ duration: 1 }}
             className="text-center mb-6 md:mb-8"
           >
-            <h2 className="text-5xl italic md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-pink-500 font-heading">
+            <h2 className="text-5xl md:text-6xl font-extrabold mb-6 font-heading">
               {t('hero', 'title')}
             </h2>
             <motion.p
@@ -222,10 +213,6 @@ const Hero: React.FC<HeroProps> = ({
         )}
       </div>
 
-      {/* Radial Gradients */}
-      {radialGradients.map((gradient, index) => (
-        <RadialGradient key={index} {...gradient} />
-      ))}
     </header>
   );
 };

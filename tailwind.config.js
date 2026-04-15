@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
+        heading: ['"Barlow Condensed"', 'sans-serif'],
       },
       screens: {
         'xs': '375px', // Add extra small breakpoint for very small mobile devices

@@ -31,7 +31,7 @@ export const de: Translation = {
     },
   },
   products: {
-    title: 'Taste the Beat',
+    title: 'Sunshine, Love and Beats in a Bottle.',
     bottles: {
       goldenHibiscus: {
         name: 'Golden Hibiscus',

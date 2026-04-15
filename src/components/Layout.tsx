@@ -294,7 +294,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 px-4 text-center bg-purple mytexture text-white/70">
+      <footer className="py-8 px-4 text-center bg-purple text-white/70">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
             <Link to="/" onClick={scrollToTop} className="mb-4 md:mb-0">

@@ -200,7 +200,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
             </div>
             
             {/* Content with backdrop blur */}
-            <div className="relative z-10 h-full mytexture flex items-center justify-center">
+            <div className="relative z-10 h-full flex items-center justify-center">
               <div className="max-w-4xl mx-auto px-4 py-12 backdrop-blur-md bg-black/10 rounded-3xl border border-white/20">
                 <div className="flex justify-end mb-8">
                   <button
@@ -307,7 +307,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 px-4 text-center text-sm bg-purple mytexture text-white/70">
+      <footer className="py-8 px-4 text-center text-sm bg-purple text-white/70">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
             <Link to="/" onClick={scrollToTop} className="mb-4 md:mb-0">

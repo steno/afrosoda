@@ -32,7 +32,7 @@ export const en: Translation = {
     },
   },
   products: {
-    title: 'Taste the Beat',
+    title: 'Sunshine, Love and Beats in a Bottle.',
     bottles: {
       goldenHibiscus: {
         name: 'Golden Hibiscus',

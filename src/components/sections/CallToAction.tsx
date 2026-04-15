@@ -6,7 +6,7 @@ const CallToAction: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="pt-0 pb-20 px-0 bg-purple mytexture">
+    <section className="pt-0 pb-20 px-0 bg-purple">
         {/* Decorative Pattern Bar */}
       <div className="relative w-full h-12 md:h-12 overflow-hidden">
         <div 
@@ -18,12 +18,12 @@ const CallToAction: React.FC = () => {
           }}
         />
       </div>
-      <div className="max-w-4xl mx-auto text-center">
+      <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
         <motion.h2
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl font-bold mt-16 mb-8 font-heading"
+          className="text-4xl font-bold mt-16 mb-8 font-heading bg-gradient-to-r from-[#ffcc00] via-[#f9a825] to-[#ffcc00] bg-clip-text text-transparent inline-block"
         >
           {t('cta', 'title')}
         </motion.h2>

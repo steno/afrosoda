@@ -71,7 +71,7 @@ const PrivacyPage: React.FC = () => {
             <Bubble key={`hero-bubble-${i}`} {...bubble} />
           ))}
         </div>
-        <div className="absolute inset-0 bg-black/30 mytexture" />
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <motion.h1 
             initial={{ y: 50, opacity: 0 }}

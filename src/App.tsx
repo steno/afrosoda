@@ -4,7 +4,6 @@ import { useLanguage } from './context/LanguageContext';
 import { useAudio } from './context/AudioContext';
 import { AnimationProvider } from './context/AnimationContext';
 import BackToTop from './components/BackToTop';
-import AudioControls from './components/AudioControls';
 import Navigation from './components/layout/Navigation';
 import Hero from './components/sections/Hero';
 import ProductShowcase from './components/sections/ProductShowcase';
@@ -236,7 +235,7 @@ function App() {
   return (
     <AnimationProvider>
       <div
-        className={`min-h-screen mytexture ${DEFAULT_HOME_SCROLL_BG} text-white overflow-hidden relative`}
+        className={`min-h-screen ${DEFAULT_HOME_SCROLL_BG} text-white overflow-hidden relative`}
       >
         {/* Dynamic Background Gradient */}
         <div
@@ -245,7 +244,6 @@ function App() {
         />
 
         <Navigation isMobile={isMobile} scrollToTop={scrollToTop} />
-        <AudioControls />
         <Hero
           isMobile={isMobile}
           currentBottleIndex={currentBottleIndex}

@@ -99,7 +99,7 @@ const AboutPage: React.FC = () => {
             <Bubble key={`hero-bubble-${i}`} {...bubble} />
           ))}
         </div>
-        <div className="absolute mytexture inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 max-w-7xl mx-auto px-4">
           <motion.h1
             initial={{ y: 50, opacity: 0 }}
@@ -202,7 +202,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 px-4 bg-purple mytexture text-white">
+      <section className="py-20 px-4 bg-purple text-white">
         
         <div className="max-w-7xl mx-auto">
           <motion.h2
@@ -221,7 +221,7 @@ const AboutPage: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
-              className="bg-white/10 mytexture backdrop-blur-md rounded-3xl p-8 md:p-12 max-w-4xl mx-auto"
+              className="bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12 max-w-4xl mx-auto"
             >
               <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden flex-shrink-0 border-4 border-white/20">

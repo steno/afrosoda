@@ -36,7 +36,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
         >
           <h2 
             id="products-title"
-            className="text-5xl font-bold mb-8 font-heading"
+            className="text-5xl font-bold mb-8 font-heading bg-gradient-to-r from-[#ffcc00] via-[#f9a825] to-[#ffcc00] bg-clip-text text-transparent inline-block"
           >
             {t('products', 'title')}
           </h2>

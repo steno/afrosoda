@@ -9,9 +9,10 @@ interface ExternalLinkProps {
   style?: React.CSSProperties;
   children: React.ReactNode;
   ariaLabel?: string;
+  hideIcon?: boolean;
 }
 
-const ExternalLink: React.FC<ExternalLinkProps> = ({ href, className = '', style, children, ariaLabel }) => {
+const ExternalLink: React.FC<ExternalLinkProps> = ({ href, className = '', style, children, ariaLabel, hideIcon = false }) => {
   const { language } = useLanguage();
   const [showTooltip, setShowTooltip] = React.useState(false);
   const tooltipId = React.useId();
@@ -24,7 +25,7 @@ const ExternalLink: React.FC<ExternalLinkProps> = ({ href, className = '', style
     }
   };
 
-  const tooltipText = language === 'en' ? 'Opens in new tab' : 'Öffnet in neuem Tab';
+  const tooltipText = language === 'en' ? 'Buy from online shop' : 'Im Online-Shop kaufen';
 
   return (
     <div className="relative inline-flex">
@@ -47,10 +48,12 @@ const ExternalLink: React.FC<ExternalLinkProps> = ({ href, className = '', style
       >
         <span className="flex items-center gap-2">
           {children}
-          <ExternalLinkIcon 
-            className="w-4 h-4" 
-            aria-hidden="true"
-          />
+          {!hideIcon && (
+            <ExternalLinkIcon 
+              className="w-4 h-4" 
+              aria-hidden="true"
+            />
+          )}
         </span>
       </motion.a>
       

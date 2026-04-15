@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from '../../hooks/useTranslation';
 import { useLanguage } from '../../context/LanguageContext';
 import { bottles } from '../../data/bottles';
+import ExternalLink from '../ExternalLink';
 
 const bottleOpenSound = 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/bottleopening.mp3';
 
@@ -126,18 +127,15 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
                   </p>
                   
                   {/* Order Now Button */}
-                  <motion.a
+                  <ExternalLink
                     href={bottle.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                     className="mb-8 inline-block text-white px-6 py-3 rounded-full font-bold uppercase hover:shadow-lg transition-all font-heading"
                     style={{ backgroundColor: bottle.buttonColor }}
-                    aria-label={`${language === 'en' ? 'Order' : 'Bestelle'} ${t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}`}
+                    ariaLabel={`${language === 'en' ? 'Order' : 'Bestelle'} ${t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}`}
+                    hideIcon
                   >
                     {language === 'en' ? 'Order Now' : 'Jetzt bestellen'}
-                  </motion.a>
+                  </ExternalLink>
                   
                   <ul 
                     className="space-y-2"

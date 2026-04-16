@@ -8,14 +8,14 @@ interface AnimationContextType {
 }
 
 const AnimationContext = createContext<AnimationContextType>({
-  isAnimationEnabled: false,
+  isAnimationEnabled: true,
   toggleAnimations: () => {},
   registerSunburstReplay: () => {},
   replaySunburst: () => {},
 });
 
 export const AnimationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [isAnimationEnabled, setIsAnimationEnabled] = useState(false);
+  const [isAnimationEnabled, setIsAnimationEnabled] = useState(true);
   const sunburstReplayRef = useRef<((reveal: boolean) => void) | null>(null);
 
   const toggleAnimations = () => {

@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
-import { useAnimationContext } from '../../context/AnimationContext';
 import { useAudio } from '../../context/AudioContext';
 
 const RollingBottleCap: React.FC = () => {
   const controls = useAnimation();
   const ref = useRef<HTMLDivElement>(null);
   const [direction, setDirection] = useState<'left' | 'right'>(Math.random() > 0.5 ? 'left' : 'right');
-  const { toggleAnimations } = useAnimationContext();
   const { toggleSound } = useAudio();
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [isHovering, setIsHovering] = useState(false);
@@ -89,7 +87,6 @@ const RollingBottleCap: React.FC = () => {
   };
 
   const handleClick = () => {
-    toggleAnimations();
     toggleSound();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);

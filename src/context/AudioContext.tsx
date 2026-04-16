@@ -21,13 +21,68 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [isPlaying, setIsPlaying] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const fadeIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Initialize audio on component mount but don't play yet
+  const TARGET_VOLUME = 0.7;
+  const FADE_DURATION = 800;
+  const FADE_STEP_MS = 30;
+
+  const clearFade = () => {
+    if (fadeIntervalRef.current) {
+      clearInterval(fadeIntervalRef.current);
+      fadeIntervalRef.current = null;
+    }
+  };
+
+  const fadeIn = (audio: HTMLAudioElement) => {
+    clearFade();
+    audio.volume = 0;
+    const steps = FADE_DURATION / FADE_STEP_MS;
+    const volumeStep = TARGET_VOLUME / steps;
+
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setIsPlaying(true);
+          fadeIntervalRef.current = setInterval(() => {
+            if (audio.volume + volumeStep >= TARGET_VOLUME) {
+              audio.volume = TARGET_VOLUME;
+              clearFade();
+            } else {
+              audio.volume = Math.min(audio.volume + volumeStep, TARGET_VOLUME);
+            }
+          }, FADE_STEP_MS);
+        })
+        .catch(error => {
+          console.error('Audio playback failed:', error);
+        });
+    }
+  };
+
+  const fadeOut = (audio: HTMLAudioElement) => {
+    clearFade();
+    const startVolume = audio.volume;
+    const steps = FADE_DURATION / FADE_STEP_MS;
+    const volumeStep = startVolume / steps;
+
+    setIsPlaying(false);
+    fadeIntervalRef.current = setInterval(() => {
+      if (audio.volume - volumeStep <= 0) {
+        audio.volume = 0;
+        audio.pause();
+        clearFade();
+      } else {
+        audio.volume = Math.max(audio.volume - volumeStep, 0);
+      }
+    }, FADE_STEP_MS);
+  };
+
   useEffect(() => {
     if (!audioRef.current) {
       audioRef.current = new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/afrososabgsound.mp3');
       audioRef.current.loop = true;
-      audioRef.current.volume = 0.7; // Fixed volume
+      audioRef.current.volume = 0;
       audioRef.current.preload = 'auto';
       audioRef.current.load();
 
@@ -37,6 +92,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
 
     return () => {
+      clearFade();
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.removeEventListener('canplaythrough', () => {
@@ -46,7 +102,6 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
   }, []);
 
-  // Initialize audio on user interaction
   const initializeAudio = () => {
     if (audioRef.current && !isInitialized) {
       const playPromise = audioRef.current.play();
@@ -72,20 +127,9 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     if (audioRef.current) {
       if (isPlaying) {
-        audioRef.current.pause();
-        setIsPlaying(false);
+        fadeOut(audioRef.current);
       } else {
-        audioRef.current.volume = 0.7; // Fixed volume
-        const playPromise = audioRef.current.play();
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              setIsPlaying(true);
-            })
-            .catch(error => {
-              console.error('Audio playback failed:', error);
-            });
-        }
+        fadeIn(audioRef.current);
       }
     }
   };

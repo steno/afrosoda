@@ -94,7 +94,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
                   className="relative overflow-hidden rounded-2xl bg-white text-gray-800 shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
                 >
                   <div
-                    className="pointer-events-none absolute inset-x-0 top-0 z-[2] flex h-1.5"
+                    className="pointer-events-none absolute inset-x-0 top-0 z-[2] flex h-2"
                     aria-hidden
                   >
                     <span className="flex-1 bg-[#c91713]" />

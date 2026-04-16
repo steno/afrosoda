@@ -25,7 +25,7 @@ const Footer: React.FC<FooterProps> = ({ scrollToTop }) => {
             />
           </Link>
 
-          <div className="flex flex-col items-center justify-center gap-0.5 sm:gap-1 text-center flex-1 min-w-0 px-1 sm:px-2 text-xs sm:text-sm">
+          <div className="flex flex-col items-center justify-center gap-0.5 sm:gap-1 text-center flex-1 min-w-0 px-1 sm:px-2 md:pl-0 md:pr-[6.5rem] text-xs sm:text-sm">
             <p className="leading-snug">{t('footer', 'copyright')}</p>
             <p className="flex flex-wrap items-center justify-center gap-x-0 leading-snug">
               <Link to="/privacy" className="hover:text-white/90 transition-colors whitespace-nowrap">

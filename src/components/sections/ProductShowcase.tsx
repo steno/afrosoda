@@ -130,7 +130,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
                   <ExternalLink
                     href={bottle.link}
                     className="mb-8 inline-block text-white px-6 py-3 rounded-full font-bold uppercase hover:shadow-lg transition-all font-heading"
-                    style={{ backgroundColor: bottle.buttonColor }}
+                    style={{ backgroundColor: bottle.buttonColor, fontSize: '1.3em' }}
                     ariaLabel={`${language === 'en' ? 'Order' : 'Bestelle'} ${t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}`}
                     hideIcon
                   >

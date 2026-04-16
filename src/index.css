@@ -93,6 +93,11 @@ h1 {
   opacity: 0.45;
 }
 
+/* Product showcase copy panel — semi-transparent white over page gradient */
+.showcase-text-panel {
+  background: rgba(255, 255, 255, 0.5);
+}
+
 .border-red-500 {
     --tw-border-opacity: 1;
     border-color: lime;

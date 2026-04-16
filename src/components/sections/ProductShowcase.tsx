@@ -84,14 +84,14 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
                 </div>
               </div>
 
-              {/* Content — white panel, brand stripe + shadow retained */}
+              {/* Content — frosted white panel, brand stripe + shadow retained */}
               <div className="w-full md:w-1/2 flex flex-col justify-center">
                 <motion.div
                   initial={{ x: index % 2 === 0 ? 50 : -50, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
                   viewport={{ once: true, amount: 0.25 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="relative overflow-hidden rounded-2xl bg-white text-gray-800 shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
+                  className="showcase-text-panel relative overflow-hidden rounded-2xl text-gray-800 shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
                 >
                   <div
                     className="pointer-events-none absolute inset-x-0 top-0 z-[2] flex h-2"

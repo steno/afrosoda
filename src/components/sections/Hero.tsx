@@ -95,7 +95,9 @@ const Hero: React.FC<HeroProps> = ({
               className="text-xl md:text-3xl font-normal"
               style={{ color: '#cb2626', fontSize: undefined, lineHeight: undefined }}
             >
-              {hoveredBottle ? t('products', 'bottles', hoveredBottle as keyof typeof t.products.bottles).name : t('hero', 'title')}
+              {isMobile
+                ? t('products', 'bottles', bottles[currentBottleIndex].key as keyof typeof t.products.bottles).name
+                : hoveredBottle ? t('products', 'bottles', hoveredBottle as keyof typeof t.products.bottles).name : t('hero', 'title')}
             </motion.h1>
           </motion.div>
         </div>
@@ -167,17 +169,6 @@ const Hero: React.FC<HeroProps> = ({
                 </motion.button>
               </div>
             </div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: initialMount.current ? 2.5 : 0 }}
-              className="mt-4 text-center"
-            >
-              <h1 className="text-xl font-medium" style={{ color: '#cb2626', fontSize: '1.25rem', lineHeight: '1.75rem' }}>
-                {t('products', 'bottles', bottles[currentBottleIndex].key as keyof typeof t.products.bottles).name}
-              </h1>
-            </motion.div>
             
             <div className="flex justify-center gap-2 mt-4">
               {bottles.map((_, index) => (

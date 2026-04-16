@@ -60,7 +60,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
                   <motion.img 
                     src={bottle.showcaseImage} 
                     alt={t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
-                    className="absolute inset-0 z-[1] w-full h-full object-cover"
+                    className="absolute inset-0 z-[1] h-full w-full origin-center scale-[1.296] object-contain object-center"
                   />
                   <div className="absolute inset-0 pointer-events-none z-[2] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {Array.from({ length: 36 }, (_, i) => {

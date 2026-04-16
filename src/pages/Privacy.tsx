@@ -99,7 +99,9 @@ const PrivacyPage: React.FC = () => {
             <div className="max-w-4xl mx-auto">
               <div className="mb-12">
                 <div className="flex items-center mb-6">
-                  <Shield className="w-8 h-8 text-purple-600 mr-3" />
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#ff7f50] mr-3">
+                    <Shield className="h-7 w-7 text-white" />
+                  </div>
                   <h2 className="text-3xl font-bold text-gray-800 font-heading">
                     {language === 'en' ? 'Privacy Policy' : 'Datenschutz'}
                   </h2>
@@ -109,7 +111,9 @@ const PrivacyPage: React.FC = () => {
                 </p>
                 <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-8">
                   <div className="flex">
-                    <AlertTriangle className="w-6 h-6 text-yellow-500 mr-3 flex-shrink-0" />
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#ff7f50] mr-3">
+                      <AlertTriangle className="h-5 w-5 text-white" />
+                    </div>
                     <div>
                       <p className="font-medium text-yellow-800">
                         {language === 'en' 
@@ -175,7 +179,9 @@ const PrivacyPage: React.FC = () => {
                   onClick={openCookieSettings}
                   className="inline-flex items-center px-4 py-2 bg-black/30 text-black rounded-lg hover:bg-black/10 transition-colors"
                 >
-                  <Cookie className="w-4 h-4 mr-2" />
+                  <span className="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-[#ff7f50]">
+                    <Cookie className="h-4 w-4 text-white" />
+                  </span>
                   {language === 'en' ? 'Manage Cookie Preferences' : 'Cookie-Einstellungen verwalten'}
                 </button>
               </section>
@@ -289,7 +295,9 @@ const PrivacyPage: React.FC = () => {
             <div className="max-w-4xl mx-auto">
               <div className="mb-12">
                 <div className="flex items-center mb-6">
-                  <Lock className="w-8 h-8 text-purple-600 mr-3" />
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#ff7f50] mr-3">
+                    <Lock className="h-7 w-7 text-white" />
+                  </div>
                   <h2 className="text-3xl font-bold text-gray-800 font-heading">
                     {language === 'en' ? 'Your Data Rights' : 'Ihre Datenrechte'}
                   </h2>
@@ -398,7 +406,9 @@ const PrivacyPage: React.FC = () => {
                 
                 <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
                   <div className="flex">
-                    <FileText className="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" />
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#ff7f50] mr-3">
+                      <FileText className="h-5 w-5 text-white" />
+                    </div>
                     <div>
                       <p className="font-medium text-blue-800 mb-1">
                         {language === 'en' ? 'Verification Process' : 'Verifizierungsprozess'}
@@ -414,7 +424,9 @@ const PrivacyPage: React.FC = () => {
                 
                 <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
                   <div className="flex">
-                    <Clock className="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" />
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#ff7f50] mr-3">
+                      <Clock className="h-5 w-5 text-white" />
+                    </div>
                     <div>
                       <p className="font-medium text-blue-800 mb-1">
                         {language === 'en' ? 'Response Time' : 'Antwortzeit'}
@@ -430,7 +442,9 @@ const PrivacyPage: React.FC = () => {
                 
                 <div className="bg-blue-50 border-l-4 border-blue-500 p-4">
                   <div className="flex">
-                    <ExternalLink className="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" />
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#ff7f50] mr-3">
+                      <ExternalLink className="h-5 w-5 text-white" />
+                    </div>
                     <div>
                       <p className="font-medium text-blue-800 mb-1">
                         {language === 'en' ? 'Complaints' : 'Beschwerden'}

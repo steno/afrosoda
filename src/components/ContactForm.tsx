@@ -455,11 +455,11 @@ const ContactForm: React.FC = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-6 py-3 bg-gradient-to-r from-yellow-600 via-orange-500 to-yellow-500 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center"
+            className="inline-flex w-full items-center justify-center rounded-full bg-[#ff7f50] px-6 py-3 font-heading text-[1.3em] font-bold uppercase text-white shadow-none transition-all hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
           >
             {isSubmitting ? (
               <>
-                <Loader className="w-5 h-5 mr-2 animate-spin" />
+                <Loader className="mr-2 h-5 w-5 shrink-0 animate-spin" />
                 {language === 'en' ? 'Sending...' : 'Wird gesendet...'}
               </>
             ) : (

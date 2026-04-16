@@ -54,7 +54,9 @@ const ImprintPage: React.FC = () => {
           {/* Company Information */}
           <section className="mb-12">
             <div className="flex items-center mb-6">
-              <Building className="w-8 h-8 text-purple-600 mr-3" />
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#ff7f50] mr-3">
+                <Building className="h-7 w-7 text-white" />
+              </div>
               <h2 className="text-3xl font-bold text-gray-800 font-heading">
                 {t('imprint', 'sections', 'company', 'title')}
               </h2>
@@ -67,7 +69,9 @@ const ImprintPage: React.FC = () => {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <div className="flex items-start mb-4">
-                    <MapPin className="w-5 h-5 text-purple-600 mr-3 mt-1 flex-shrink-0" />
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#ff7f50] mr-3 mt-0.5">
+                      <MapPin className="h-4 w-4 text-white" />
+                    </div>
                     <div>
                       <p className="font-medium text-gray-800 mb-1">
                         {language === 'en' ? 'Address' : 'Adresse'}
@@ -86,7 +90,9 @@ const ImprintPage: React.FC = () => {
                 
                 <div>
                   <div className="flex items-start mb-4">
-                    <Phone className="w-5 h-5 text-purple-600 mr-3 mt-1 flex-shrink-0" />
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#ff7f50] mr-3 mt-0.5">
+                      <Phone className="h-4 w-4 text-white" />
+                    </div>
                     <div>
                       <p className="font-medium text-gray-800 mb-1">
                         {language === 'en' ? 'Phone' : 'Telefon'}
@@ -96,7 +102,9 @@ const ImprintPage: React.FC = () => {
                   </div>
                   
                   <div className="flex items-start mb-4">
-                    <Mail className="w-5 h-5 text-purple-600 mr-3 mt-1 flex-shrink-0" />
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#ff7f50] mr-3 mt-0.5">
+                      <Mail className="h-4 w-4 text-white" />
+                    </div>
                     <div>
                       <p className="font-medium text-gray-800 mb-1">E-Mail</p>
                       <p className="text-gray-600">{t('imprint', 'sections', 'company', 'contact', 'email')}</p>
@@ -104,7 +112,9 @@ const ImprintPage: React.FC = () => {
                   </div>
                   
                   <div className="flex items-start">
-                    <FileText className="w-5 h-5 text-purple-600 mr-3 mt-1 flex-shrink-0" />
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#ff7f50] mr-3 mt-0.5">
+                      <FileText className="h-4 w-4 text-white" />
+                    </div>
                     <div>
                       <p className="font-medium text-gray-800 mb-1">
                         {language === 'en' ? 'VAT ID' : 'USt-IdNr.'}
@@ -185,7 +195,9 @@ const ImprintPage: React.FC = () => {
           {/* Dispute Resolution */}
           <section className="mb-12">
             <div className="flex items-center mb-4">
-              <Scale className="w-6 h-6 text-purple-600 mr-3" />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#ff7f50] mr-3">
+                <Scale className="h-5 w-5 text-white" />
+              </div>
               <h3 className="text-2xl font-bold text-gray-800 font-heading">
                 {t('imprint', 'sections', 'dispute', 'title')}
               </h3>

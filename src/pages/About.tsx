@@ -44,9 +44,9 @@ const AboutPage: React.FC = () => {
 
   // Map value icons to Lucide components
   const valueIcons = [
-    <Globe className="w-8 h-8 text-[#c91713]" />,
-    <Leaf className="w-8 h-8 text-[#f5821f]" />,
-    <Music className="w-8 h-8 text-[#c91713]" />,
+    <Globe className="w-8 h-8 text-white" />,
+    <Leaf className="w-8 h-8 text-white" />,
+    <Music className="w-8 h-8 text-white" />,
   ];
 
   const bubbles = Array.from({ length: 150 }, (_, i) => ({
@@ -151,7 +151,7 @@ const AboutPage: React.FC = () => {
                   viewport={{ once: true }}
                   className="bg-white p-8 rounded-3xl shadow-lg flex flex-col items-center text-center"
                 >
-                  <div className="w-16 h-16 bg-[#ffcc00]/20 rounded-2xl flex items-center justify-center mb-6">
+                  <div className="w-16 h-16 bg-[#ff7f50] rounded-2xl flex items-center justify-center mb-6">
                     {valueIcons[index]}
                   </div>
                   <h3 className="text-xl font-bold mb-4 text-gray-800 font-heading">{item.title}</h3>

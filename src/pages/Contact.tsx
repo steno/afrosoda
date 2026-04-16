@@ -81,8 +81,8 @@ const ContactPage: React.FC = () => {
               
               <div className="space-y-8">
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-[#ffcc00]/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-[#c91713]" />
+                  <div className="w-12 h-12 bg-[#ff7f50] rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-2 font-heading">
@@ -98,8 +98,8 @@ const ContactPage: React.FC = () => {
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-[#ffcc00]/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                    <Mail className="w-6 h-6 text-[#c91713]" />
+                  <div className="w-12 h-12 bg-[#ff7f50] rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                    <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-2 font-heading">
@@ -110,8 +110,8 @@ const ContactPage: React.FC = () => {
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-[#ffcc00]/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                    <Phone className="w-6 h-6 text-[#c91713]" />
+                  <div className="w-12 h-12 bg-[#ff7f50] rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                    <Phone className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-2 font-heading">
@@ -122,8 +122,8 @@ const ContactPage: React.FC = () => {
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="w-12 h-12 bg-[#ffcc00]/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                    <MessageSquare className="w-6 h-6 text-[#c91713]" />
+                  <div className="w-12 h-12 bg-[#ff7f50] rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                    <MessageSquare className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-2 font-heading">

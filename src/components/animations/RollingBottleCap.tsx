@@ -2,7 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { useAudio } from '../../context/AudioContext';
 
-const RollingBottleCap: React.FC = () => {
+interface RollingBottleCapProps {
+  startDelay?: number;
+}
+
+const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) => {
   const controls = useAnimation();
   const ref = useRef<HTMLDivElement>(null);
   const [direction, setDirection] = useState<'left' | 'right'>(Math.random() > 0.5 ? 'left' : 'right');
@@ -61,8 +65,7 @@ const RollingBottleCap: React.FC = () => {
       }
     };
 
-    const initialDelay = Math.random() * 2;
-    const initialTimeout = setTimeout(animate, initialDelay * 1000);
+    const initialTimeout = setTimeout(animate, startDelay * 1000);
 
     return () => {
       isMounted = false;
@@ -72,7 +75,7 @@ const RollingBottleCap: React.FC = () => {
       }
       controls.stop();
     };
-  }, [controls, direction, isHovering]);
+  }, [controls, direction, isHovering, startDelay]);
 
   const handleMouseEnter = () => {
     if (timeoutRef.current) {

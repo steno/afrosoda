@@ -72,7 +72,7 @@ const Hero: React.FC<HeroProps> = ({
         ))}
       </div>
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-20">
-        <RollingBottleCap />
+        <RollingBottleCap startDelay={2 + (bottles.length - 1) * 0.2 + 0.8} />
       </div>
       
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 flex flex-col justify-between h-full">

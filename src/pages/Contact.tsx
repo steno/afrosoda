@@ -6,62 +6,35 @@ import { useTranslation } from '../hooks/useTranslation';
 import ContactForm from '../components/ContactForm';
 import { useLanguage } from '../context/LanguageContext';
 import HorizontalBar from '../components/HorizontalBar';
-
-// Reuse the Bubble component from App.tsx
-const Bubble = ({ delay = 0, size = 100, x = 0 }: { delay?: number; size?: number; x?: number }) => (
-  <motion.div
-    initial={{ y: '100vh', opacity: 0.7 }}
-    animate={{
-      y: '-100vh',
-      opacity: [0.7, 0.9, 0.7],
-      x: [x, x + 50, x],
-    }}
-    transition={{
-      duration: 15 + Math.random() * 10,
-      repeat: Infinity,
-      delay: delay,
-      ease: "linear",
-      x: {
-        duration: 8,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }
-    }}
-    className="absolute rounded-full bg-white/10 backdrop-blur-sm pointer-events-none"
-    style={{
-      width: size,
-      height: size,
-    }}
-  />
-);
+import Bubble from '../components/animations/Bubble';
 
 const ContactPage: React.FC = () => {
   const { language } = useLanguage();
   const { t } = useTranslation();
 
-  // Generate bubbles for the hero section
-  const heroBubbles = Array.from({ length: 10 }, (_, i) => ({
-    delay: i * 2,
-    size: 50 + Math.random() * 100,
-    x: (i % 5) * (window.innerWidth / 5) + Math.random() * 100 - 50,
+  const bubbles = Array.from({ length: 150 }, (_, i) => ({
+    delay: i * 0.2,
+    size: 6 + Math.random() * 28,
+    x: Math.random() * window.innerWidth,
   }));
-  
+
   return (
     <SimpleLayout>
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[5]">
+        {bubbles.map((bubble, i) => (
+          <Bubble key={i} {...bubble} />
+        ))}
+      </div>
+
       {/* Hero Section */}
-      <section className="relative py-20 bg-[linear-gradient(180deg,#ffcc00_0%,#f5821f_70%,#c91713_100%)] text-white overflow-hidden">
-         {/* Animated Bubbles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
-          {heroBubbles.map((bubble, i) => (
-            <Bubble key={`hero-bubble-${i}`} {...bubble} />
-          ))}
-        </div>
+      <section className="relative py-20 bg-gradient-to-b from-[#f5821f] via-[#d4451f] to-[#c91713] text-white overflow-hidden">
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <motion.h1 
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-5xl font-bold text-center mb-6 mt-8 font-heading"
+            style={{ color: 'coral' }}
           >
             {language === 'en' ? 'Get in Touch' : 'Kontaktieren Sie uns'}
           </motion.h1>

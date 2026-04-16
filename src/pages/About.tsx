@@ -4,34 +4,7 @@ import { ChevronLeft, ChevronRight, Star, Globe, Leaf, Music } from 'lucide-reac
 import { useTranslation } from '../hooks/useTranslation';
 import SimpleLayout from '../components/SimpleLayout';
 import { useLanguage } from '../context/LanguageContext';
-
-// Reuse the Bubble component from App.tsx
-const Bubble = ({ delay = 0, size = 100, x = 0 }: { delay?: number; size?: number; x?: number }) => (
-  <motion.div
-    initial={{ y: '100vh', opacity: 0.7 }}
-    animate={{
-      y: '-100vh',
-      opacity: [0.7, 0.9, 0.7],
-      x: [x, x + 50, x],
-    }}
-    transition={{
-      duration: 15 + Math.random() * 10,
-      repeat: Infinity,
-      delay: delay,
-      ease: 'linear',
-      x: {
-        duration: 8,
-        repeat: Infinity,
-        ease: 'easeInOut',
-      },
-    }}
-    className="absolute rounded-full bg-white/10 backdrop-blur-sm pointer-events-none"
-    style={{
-      width: size,
-      height: size,
-    }}
-  />
-);
+import Bubble from '../components/animations/Bubble';
 
 // Define testimonial images separately since they don’t need translation
 const testimonialImages = [
@@ -76,35 +49,29 @@ const AboutPage: React.FC = () => {
     <Music className="w-8 h-8 text-[#c91713]" />,
   ];
 
-  // Generate bubbles for the hero section
-  const heroBubbles = Array.from({ length: 10 }, (_, i) => ({
-    delay: i * 2,
-    size: 50 + Math.random() * 100,
-    x: (i % 5) * (window.innerWidth / 5) + Math.random() * 100 - 50,
-  }));
-
-  // Generate bubbles for the about section
-  const aboutBubbles = Array.from({ length: 8 }, (_, i) => ({
-    delay: i * 1.5,
-    size: 30 + Math.random() * 80,
-    x: (i % 4) * (window.innerWidth / 4) + Math.random() * 80 - 40,
+  const bubbles = Array.from({ length: 150 }, (_, i) => ({
+    delay: i * 0.2,
+    size: 6 + Math.random() * 28,
+    x: Math.random() * window.innerWidth,
   }));
 
   return (
     <SimpleLayout>
-      {/* Hero Section with Bubbles */}
-      <section className="relative py-20 bg-[linear-gradient(180deg,#ffcc00_0%,#f5821f_70%,#c91713_100%)] text-white overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
-          {heroBubbles.map((bubble, i) => (
-            <Bubble key={`hero-bubble-${i}`} {...bubble} />
-          ))}
-        </div>
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-[5]">
+        {bubbles.map((bubble, i) => (
+          <Bubble key={i} {...bubble} />
+        ))}
+      </div>
+
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-b from-[#f5821f] via-[#d4451f] to-[#c91713] text-white overflow-hidden">
         <div className="relative z-10 max-w-7xl mx-auto px-4">
           <motion.h1
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-5xl font-bold text-center mb-6 mt-8 font-heading"
+            style={{ color: 'coral' }}
           >
             {t('about', 'hero', 'title')}
           </motion.h1>
@@ -119,13 +86,8 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* About Section - 2 Column Layout with Bubbles */}
+      {/* About Section - 2 Column Layout */}
       <section className="relative py-20 px-4 bg-white overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {aboutBubbles.map((bubble, i) => (
-            <Bubble key={`about-bubble-${i}`} {...bubble} />
-          ))}
-        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#ffcc00]/10 to-white opacity-50" />
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">

@@ -4,8 +4,7 @@ import {
   Instagram, 
   Menu, 
   X, 
-  Globe,
-  Clock
+  Globe
 } from 'lucide-react';
 import TikTokIcon from './icons/TikTokIcon';
 import { Link, useLocation } from 'react-router-dom';
@@ -58,7 +57,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-white text-gray-800 overflow-hidden relative">
       {/* Sticky Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#c91713] border-b border-white/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Left section - Social icons on desktop, empty on mobile */}
@@ -199,15 +198,28 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
               ))}
             </div>
             
-            {/* Content with backdrop blur */}
-            <div className="relative z-10 h-full flex items-center justify-center">
-              <div className="max-w-4xl mx-auto px-4 py-12 backdrop-blur-md bg-black/10 rounded-3xl border border-white/20">
-                <div className="flex justify-end mb-8">
+            {/* Content */}
+            <div className="relative z-10 h-full flex items-center justify-center px-6">
+              <div className="w-full max-w-2xl px-8 py-10 md:px-12 md:py-14 backdrop-blur-xl bg-white/10 rounded-[2rem] border border-white/15 shadow-2xl">
+                <div className="flex items-center justify-between mb-12">
+                  <Link
+                    to="/"
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    <img
+                      src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/logolight.png"
+                      alt="AfroSoda Logo"
+                      className="h-10"
+                    />
+                  </Link>
                   <button
                     onClick={() => setIsMenuOpen(false)}
-                    className="text-white hover:text-yellow-300 transition-colors"
+                    className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-colors"
                   >
-                    <X className="w-8 h-8" />
+                    <X className="w-5 h-5" />
                   </button>
                 </div>
 

@@ -17,7 +17,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
 
   return (
     <section 
-      className="py-20 relative overflow-hidden"
+      className="py-10 relative overflow-hidden"
       aria-labelledby="products-title"
     >
       <div className="relative z-10 max-w-6xl mx-auto px-4">
@@ -60,7 +60,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
                   <motion.img 
                     src={bottle.showcaseImage} 
                     alt={t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
-                    className="absolute inset-0 z-[1] w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+                    className="absolute inset-0 z-[1] w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 pointer-events-none z-[2] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {Array.from({ length: 36 }, (_, i) => {

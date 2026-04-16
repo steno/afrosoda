@@ -21,7 +21,7 @@ const Footer: React.FC<FooterProps> = ({ scrollToTop }) => {
             <img
               src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/footer-logo.png"
               alt="AfroSoda Logo"
-              className="h-14 w-auto sm:h-16 md:h-20 lg:h-24 opacity-100"
+              className="h-14 w-auto sm:h-40 md:h-40 lg:h-40 opacity-100"
             />
           </Link>
 

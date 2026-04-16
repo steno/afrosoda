@@ -36,7 +36,7 @@ const FullScreenMenu: React.FC<FullScreenMenuProps> = ({ onClose, t, language })
               <img
                 src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/logolight.png"
                 alt="AfroSoda Logo"
-                className="h-10"
+                className="h-[2em] w-auto"
               />
             </Link>
             <button

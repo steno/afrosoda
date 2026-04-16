@@ -55,7 +55,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-white text-gray-800 overflow-hidden relative">
       {/* Sticky Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#c91713] border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Left section - Social icons on desktop, empty on mobile */}
@@ -78,7 +78,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
                 <Link to="/" onClick={scrollToTop}>
                   <img src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/logolight.png"
                     alt="AfroSoda Logo"
-                    className="h-12"
+                    className="h-[2em] w-auto"
                   />
                 </Link>
               </motion.div>
@@ -228,7 +228,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
                     <img
                       src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/logolight.png"
                       alt="AfroSoda Logo"
-                      className="h-10"
+                      className="h-[2em] w-auto"
                     />
                   </Link>
                   <button
@@ -315,7 +315,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
               <img 
                 src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/footer-logo.png" 
                 alt="AfroSoda Logo" 
-                className="h-40 opacity-100"
+                className="h-14 w-auto sm:h-40 md:h-40 lg:h-40 opacity-100"
               />
             </Link>
             <div className="flex gap-6">

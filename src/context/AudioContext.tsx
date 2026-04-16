@@ -25,7 +25,8 @@ export const useAudio = () => {
   return context;
 };
 
-const TARGET_VOLUME = 0.7;
+/** Max gain only for the ambient loop in this provider — not bottle/SFX elsewhere. */
+const TARGET_VOLUME = 0.35;
 const FADE_DURATION = 800;
 const FADE_STEP_MS = 30;
 

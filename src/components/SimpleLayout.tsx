@@ -25,9 +25,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
   const { t } = useTranslation();
   const location = useLocation();
   const isAboutPage = location.pathname === '/about';
-  const isPrivacyPage = location.pathname === '/privacy';
   const isContactPage = location.pathname === '/contact';
-  const isImprintPage = location.pathname === '/imprint';
 
   // Check if we're on mobile
   useEffect(() => {
@@ -86,8 +84,24 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
               </motion.div>
             </div>
 
-            {/* Language Toggle and Menu */}
+            {/* Desktop page links; hamburger only on small screens */}
             <div className="flex items-center gap-6">
+              <div className="hidden md:flex items-center gap-6 text-sm font-medium">
+                <Link
+                  to="/about"
+                  onClick={() => window.scrollTo(0, 0)}
+                  className={`transition-colors hover:text-white ${isAboutPage ? 'text-white' : 'text-white/70'}`}
+                >
+                  {t('menu', 'about')}
+                </Link>
+                <Link
+                  to="/contact"
+                  onClick={() => window.scrollTo(0, 0)}
+                  className={`transition-colors hover:text-white ${isContactPage ? 'text-white' : 'text-white/70'}`}
+                >
+                  {language === 'en' ? 'Contact' : 'Kontakt'}
+                </Link>
+              </div>
               <button
                 onClick={() => setLanguage(language === 'en' ? 'de' : 'en')}
                 className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
@@ -97,8 +111,10 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
               </button>
 
               <button
+                type="button"
                 onClick={() => setIsMenuOpen(true)}
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 hover:text-white transition-colors md:hidden"
+                aria-label="Open menu"
               >
                 <Menu className="w-6 h-6" />
               </button>
@@ -255,30 +271,6 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
                           {language === 'en' ? 'Contact' : 'Kontakt'}
                         </Link>
                       </li>
-                      <li>
-                        <Link 
-                          to="/privacy" 
-                          className={`hover:text-yellow-300 transition-colors ${location.pathname === '/privacy' ? 'text-yellow-300' : 'text-white'}`}
-                          onClick={() => {
-                            setIsMenuOpen(false);
-                            window.scrollTo(0, 0);
-                          }}
-                        >
-                          {t('menu', 'privacy')}
-                        </Link>
-                      </li>
-                      <li>
-                        <Link 
-                          to="/imprint" 
-                          className={`hover:text-yellow-300 transition-colors ${location.pathname === '/imprint' ? 'text-yellow-300' : 'text-white'}`}
-                          onClick={() => {
-                            setIsMenuOpen(false);
-                            window.scrollTo(0, 0);
-                          }}
-                        >
-                          {t('menu', 'imprint')}
-                        </Link>
-                      </li>
                     </ul>
                   </motion.div>
 
@@ -289,9 +281,6 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
                     transition={{ delay: 0.3 }}
                     className="text-white/90"
                   >
-                    <h3 className="text-xl font-bold text-white mb-4 font-heading">
-                      {t('contact', 'title')}
-                    </h3>
                     <div className="space-y-2">
                       <p className="font-medium text-white">
                         {t('contact', 'company')}
@@ -324,25 +313,15 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
             <Link to="/" onClick={scrollToTop} className="mb-4 md:mb-0">
               <img 
-                src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/logolight.png" 
+                src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/footer-logo.png" 
                 alt="AfroSoda Logo" 
-                className="h-8"
+                className="h-40 opacity-30"
               />
             </Link>
             <div className="flex gap-6">
               {!isAboutPage && (
                 <Link to="/about" onClick={() => window.scrollTo(0, 0)} className="hover:text-white transition-colors">
                   {t('menu', 'about')}
-                </Link>
-              )}
-              {!isPrivacyPage && (
-                <Link to="/privacy" onClick={() => window.scrollTo(0, 0)} className="hover:text-white transition-colors">
-                  {t('menu', 'privacy')}
-                </Link>
-              )}
-              {!isImprintPage && (
-                <Link to="/imprint" onClick={() => window.scrollTo(0, 0)} className="hover:text-white transition-colors">
-                  {t('menu', 'imprint')}
                 </Link>
               )}
               {!isContactPage && (

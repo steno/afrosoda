@@ -80,30 +80,6 @@ const FullScreenMenu: React.FC<FullScreenMenuProps> = ({ onClose, t, language })
                     {language === 'en' ? 'Contact' : 'Kontakt'}
                   </Link>
                 </li>
-                <li>
-                  <Link 
-                    to="/privacy" 
-                    className="hover:text-yellow-300 transition-colors text-white"
-                    onClick={() => {
-                      onClose();
-                      window.scrollTo(0, 0);
-                    }}
-                  >
-                    {t('menu', 'privacy')}
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/imprint" 
-                    className="hover:text-yellow-300 transition-colors text-white"
-                    onClick={() => {
-                      onClose();
-                      window.scrollTo(0, 0);
-                    }}
-                  >
-                    {t('menu', 'imprint')}
-                  </Link>
-                </li>
               </ul>
             </motion.div>
 
@@ -114,9 +90,6 @@ const FullScreenMenu: React.FC<FullScreenMenuProps> = ({ onClose, t, language })
               transition={{ delay: 0.3 }}
               className="text-white/90"
             >
-              <h3 className="text-xl font-bold text-white mb-4 font-heading">
-                {t('contact', 'title')}
-              </h3>
               <div className="space-y-2">
                 <p className="font-medium text-white">
                   {t('contact', 'company')}

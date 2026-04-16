@@ -25,7 +25,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { t } = useTranslation();
   const location = useLocation();
   const isAboutPage = location.pathname === '/about';
-  const isPrivacyPage = location.pathname === '/privacy';
   const isContactPage = location.pathname === '/contact';
 
   // Check if we're on mobile
@@ -311,20 +310,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
             <Link to="/" onClick={scrollToTop} className="mb-4 md:mb-0">
               <img 
-                src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/logolight.png" 
+                src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/footer-logo.png" 
                 alt="AfroSoda Logo" 
-                className="h-8"
+                className="h-40 opacity-30"
               />
             </Link>
             <div className="flex gap-6">
               {!isAboutPage && (
                 <Link to="/about" onClick={() => window.scrollTo(0, 0)} className="hover:text-white transition-colors">
                   {t('menu', 'about')}
-                </Link>
-              )}
-              {!isPrivacyPage && (
-                <Link to="/privacy" onClick={() => window.scrollTo(0, 0)} className="hover:text-white transition-colors">
-                  {t('menu', 'privacy')}
                 </Link>
               )}
               {!isContactPage && (

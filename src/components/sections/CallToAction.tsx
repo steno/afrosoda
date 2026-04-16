@@ -10,11 +10,10 @@ const CallToAction: React.FC = () => {
         {/* Decorative Pattern Bar */}
       <div className="relative w-full h-12 md:h-12 overflow-hidden">
         <div 
-          className="absolute inset-0 bg-repeat-x"
+          className="absolute inset-0 bg-repeat-x pattern-slide"
           style={{
             backgroundImage: `url('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/pattern.png ')`,
             backgroundSize: 'auto 80%',
-            animation: 'slidePattern 30s linear infinite'
           }}
         />
       </div>
@@ -22,6 +21,7 @@ const CallToAction: React.FC = () => {
         <motion.h2
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8 }}
           className="text-4xl font-bold mt-16 mb-8 font-heading bg-gradient-to-r from-[#ffcc00] via-[#f9a825] to-[#ffcc00] bg-clip-text text-transparent inline-block"
         >

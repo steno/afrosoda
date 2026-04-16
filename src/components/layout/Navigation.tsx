@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Instagram, 
   Menu, 
-  X, 
   Globe
 } from 'lucide-react';
 import TikTokIcon from '../icons/TikTokIcon';
@@ -53,8 +52,24 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile, scrollToTop }) => {
               </motion.div>
             </div>
 
-            {/* Language Toggle and Menu */}
+            {/* Desktop page links; hamburger only on small screens */}
             <div className="flex items-center gap-6">
+              <div className="hidden md:flex items-center gap-6 text-sm font-medium">
+                <Link
+                  to="/about"
+                  onClick={scrollToTop}
+                  className="text-white/70 hover:text-white transition-colors"
+                >
+                  {t('menu', 'about')}
+                </Link>
+                <Link
+                  to="/contact"
+                  onClick={scrollToTop}
+                  className="text-white/70 hover:text-white transition-colors"
+                >
+                  {language === 'en' ? 'Contact' : 'Kontakt'}
+                </Link>
+              </div>
               <button
                 onClick={() => setLanguage(language === 'en' ? 'de' : 'en')}
                 className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
@@ -64,8 +79,10 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile, scrollToTop }) => {
               </button>
 
               <button
+                type="button"
                 onClick={() => setIsMenuOpen(true)}
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 hover:text-white transition-colors md:hidden"
+                aria-label="Open menu"
               >
                 <Menu className="w-6 h-6" />
               </button>

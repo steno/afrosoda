@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -6,7 +6,8 @@ import { useLanguage } from '../../context/LanguageContext';
 import Bubble from '../animations/Bubble';
 import RollingBottleCap from '../animations/RollingBottleCap';
 import Sunburst from '../animations/Sunburst';
-import { bottles } from '../../data/bottles';
+import { bottles, SODA_FIZZ_SOUND_URL } from '../../data/bottles';
+import { useSodaFizzHover } from '../../hooks/useSodaFizzHover';
 
 interface HeroProps {
   isMobile: boolean;
@@ -30,6 +31,17 @@ const Hero: React.FC<HeroProps> = ({
   const { language } = useLanguage();
   const { t } = useTranslation();
   const initialMount = useRef(true);
+  const { playFizz, stopFizz } = useSodaFizzHover(SODA_FIZZ_SOUND_URL);
+
+  const bubbleConfigs = useMemo(() => {
+    const count = isMobile ? 28 : 72;
+    const width = typeof window !== 'undefined' ? window.innerWidth : 1200;
+    return Array.from({ length: count }, (_, i) => ({
+      delay: i * (isMobile ? 0.4 : 0.22),
+      size: 6 + Math.random() * (isMobile ? 16 : 28),
+      x: Math.random() * width,
+    }));
+  }, [isMobile]);
 
   const nextBottle = () => {
     initialMount.current = false;
@@ -42,12 +54,6 @@ const Hero: React.FC<HeroProps> = ({
     const prevIndex = (currentBottleIndex - 1 + bottles.length) % bottles.length;
     setCurrentBottleIndex(prevIndex);
   };
-
-  const bubbles = Array.from({ length: 150 }, (_, i) => ({
-    delay: i * 0.2,
-    size: 6 + Math.random() * 28,
-    x: Math.random() * window.innerWidth,
-  }));
 
   const handleBottleClick = () => {
     const bottleKey = bottles[currentBottleIndex].key;
@@ -69,7 +75,7 @@ const Hero: React.FC<HeroProps> = ({
 
       {/* Animated Bubbles and Rolling Bottle Cap */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-[5]">
-        {bubbles.map((bubble, i) => (
+        {bubbleConfigs.map((bubble, i) => (
           <Bubble key={i} {...bubble} />
         ))}
       </div>
@@ -108,7 +114,7 @@ const Hero: React.FC<HeroProps> = ({
             <div className="relative w-full max-w-[300px] h-full mx-auto">
               <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none">
-                  {Array.from({ length: 40 }, (_, i) => {
+                  {Array.from({ length: 14 }, (_, i) => {
                     const size = 4 + Math.random() * 12;
                     return (
                       <span
@@ -141,6 +147,8 @@ const Hero: React.FC<HeroProps> = ({
                       className="h-full object-contain cursor-pointer"
                       onClick={handleBottleClick}
                       onKeyDown={handleKeyDown}
+                      onMouseEnter={playFizz}
+                      onMouseLeave={stopFizz}
                       role="button"
                       tabIndex={0}
                       aria-label={`View ${t('products', 'bottles', bottles[currentBottleIndex].key as keyof typeof t.products.bottles).name} details`}
@@ -193,8 +201,14 @@ const Hero: React.FC<HeroProps> = ({
                   y: -20,
                   transition: { duration: 0.3 }
                 }}
-                onMouseEnter={() => setHoveredBottle(bottle.key)}
-                onMouseLeave={() => setHoveredBottle(null)}
+                onMouseEnter={() => {
+                  setHoveredBottle(bottle.key);
+                  playFizz();
+                }}
+                onMouseLeave={() => {
+                  setHoveredBottle(null);
+                  stopFizz();
+                }}
                 onClick={() => {
                   playBottleSound(bottle.key);
                   scrollToProduct(bottle.key);
@@ -211,7 +225,7 @@ const Hero: React.FC<HeroProps> = ({
                     className="absolute inset-0 w-full h-full object-contain"
                   />
                   <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {Array.from({ length: 60 }, (_, i) => {
+                    {Array.from({ length: 36 }, (_, i) => {
                       const size = 4 + Math.random() * 12;
                       return (
                         <span

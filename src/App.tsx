@@ -111,10 +111,16 @@ function App() {
     };
   }, [initializeAudio]);
 
-  // Track scroll position to determine active product
+  // Track scroll position to determine active product (rAF-throttled + passive scroll)
   useEffect(() => {
+    let rafId = 0;
+
     const handleScroll = () => {
-      if (Object.values(productRefs.current).some(ref => ref !== null)) {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = 0;
+        if (!Object.values(productRefs.current).some(ref => ref !== null)) return;
+
         const productPositions = Object.entries(productRefs.current)
           .filter(([_, ref]) => ref !== null)
           .map(([key, ref]) => {
@@ -128,14 +134,14 @@ function App() {
           });
 
         const viewportHeight = window.innerHeight;
-        let maxVisibleProduct = null;
+        let maxVisibleProduct: string | null = null;
         let maxVisibleArea = 0;
 
         for (const product of productPositions) {
           const visibleTop = Math.max(0, product.top);
           const visibleBottom = Math.min(viewportHeight, product.bottom);
           const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-          const visiblePercentage = visibleHeight / product.height;
+          const visiblePercentage = product.height > 0 ? visibleHeight / product.height : 0;
 
           if (visiblePercentage > maxVisibleArea) {
             maxVisibleArea = visiblePercentage;
@@ -143,21 +149,22 @@ function App() {
           }
         }
 
-        if (maxVisibleProduct && maxVisibleProduct !== activeProductKey) {
-          setActiveProductKey(maxVisibleProduct);
+        if (maxVisibleProduct) {
+          setActiveProductKey(prev => (maxVisibleProduct !== prev ? maxVisibleProduct : prev));
         }
-      }
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
-
-    // Initial check
-    setTimeout(handleScroll, 500);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [activeProductKey]);
+  }, []);
 
   // Function to play a specific bottle sound
   const playBottleSound = (bottleKey: string) => {
@@ -255,11 +262,10 @@ function App() {
         />
         <div className="relative w-full h-12 md:h-12 overflow-hidden">
           <div
-            className="absolute inset-0 bg-repeat-x"
+            className="absolute inset-0 bg-repeat-x pattern-slide"
             style={{
               backgroundImage: `url('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/pattern.png')`,
               backgroundSize: 'auto 80%',
-              animation: 'slidePattern 30s linear infinite'
             }}
           />
         </div>

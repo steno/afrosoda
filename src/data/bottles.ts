@@ -10,6 +10,14 @@ export const BRAND_COLORS = {
 export const DEFAULT_HOME_SCROLL_BG =
   'bg-[linear-gradient(180deg,#8b0f0d_0%,#c91713_20%,#f5821f_35%,#ffcc00_50%,#ffe566_62%,#b5cf00_78%,#8aab00_100%)]';
 
+/** Fizz SFX on bottle image hover (`media/music` in Supabase public bucket). */
+export const SODA_FIZZ_SOUND_URL =
+  'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/sodafizz.mp3';
+
+/** Vegan seal on product showcase cards (`media/images` in Supabase public bucket). */
+export const VEGAN_BADGE_IMAGE_URL =
+  'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/vegan.png';
+
 export const bottles = [
   {
     color: 'from-[#c91713] to-[#f5821f]',

@@ -45,6 +45,28 @@ h1 {
   }
 }
 
+/* Decorative pattern: background-position animation is repaint-heavy on mobile */
+.pattern-slide {
+  animation: slidePattern 30s linear infinite;
+}
+
+@media (max-width: 767px) {
+  .pattern-slide {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pattern-slide {
+    animation: none;
+  }
+
+  .bubble-rise {
+    animation: none;
+    opacity: 0.35;
+  }
+}
+
 .bg-purple {
     background-color: #c91713;
 }

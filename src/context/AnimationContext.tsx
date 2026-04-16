@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useRef, useCallback, ReactNode } from 'react';
+import React, { createContext, useState, useContext, useRef, useCallback, useEffect, ReactNode } from 'react';
 
 interface AnimationContextType {
   isAnimationEnabled: boolean;
@@ -14,9 +14,21 @@ const AnimationContext = createContext<AnimationContextType>({
   replaySunburst: () => {},
 });
 
+function getPrefersReducedMotion(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 export const AnimationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [isAnimationEnabled, setIsAnimationEnabled] = useState(true);
+  const [isAnimationEnabled, setIsAnimationEnabled] = useState(() => !getPrefersReducedMotion());
   const sunburstReplayRef = useRef<((reveal: boolean) => void) | null>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onChange = () => setIsAnimationEnabled(!mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
 
   const toggleAnimations = () => {
     setIsAnimationEnabled(prev => !prev);

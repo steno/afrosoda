@@ -19,20 +19,14 @@ const Footer: React.FC<FooterProps> = ({ scrollToTop }) => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
           <Link to="/" onClick={scrollToTop} className="mb-4 md:mb-0">
             <img 
-              src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/logolight.png" 
+              src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/footer-logo.png" 
               alt="AfroSoda Logo" 
-              className="h-8"
+              className="h-40 opacity-30"
             />
           </Link>
           <div className="flex gap-6">
             <Link to="/about" onClick={() => window.scrollTo(0, 0)} className="hover:text-white transition-colors">
               {t('menu', 'about')}
-            </Link>
-            <Link to="/privacy" onClick={() => window.scrollTo(0, 0)} className="hover:text-white transition-colors">
-              {t('menu', 'privacy')}
-            </Link>
-            <Link to="/imprint" onClick={() => window.scrollTo(0, 0)} className="hover:text-white transition-colors">
-              {t('menu', 'imprint')}
             </Link>
             <Link to="/contact" onClick={() => window.scrollTo(0, 0)} className="hover:text-white transition-colors">
               {language === 'en' ? 'Contact' : 'Kontakt'}

@@ -24,8 +24,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   
   const { t } = useTranslation();
   const location = useLocation();
-  const isAboutPage = location.pathname === '/about';
-  const isContactPage = location.pathname === '/contact';
 
   // Check if we're on mobile
   useEffect(() => {
@@ -315,18 +313,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 className="h-14 w-auto sm:h-40 md:h-40 lg:h-40 opacity-100"
               />
             </Link>
-            <div className="flex gap-6">
-              {!isAboutPage && (
-                <Link to="/about" onClick={() => window.scrollTo(0, 0)} className="hover:text-white transition-colors">
-                  {t('menu', 'about')}
-                </Link>
-              )}
-              {!isContactPage && (
-                <Link to="/contact" onClick={() => window.scrollTo(0, 0)} className="hover:text-white transition-colors">
-                  {language === 'en' ? 'Contact' : 'Kontakt'}
-                </Link>
-              )}
-            </div>
             <div className="flex items-center gap-4">
               <a href="https://www.instagram.com/afrosodaofficial" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
                 <Instagram className="w-5 h-5" />

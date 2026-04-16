@@ -69,7 +69,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
               initial={{ y: 100, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className={`group flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 md:gap-16 md:min-h-[85vh]`}
+              className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 md:gap-16 md:min-h-[85vh]`}
               role="article"
               aria-labelledby={`product-title-${bottle.key}`}
               onMouseEnter={playOpenSound}
@@ -78,7 +78,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
               {/* Bottle Display */}
               <div className="w-full md:w-1/2 flex justify-center md:self-stretch">
                 <div
-                  className="w-full max-w-[600px] aspect-square md:max-w-none md:aspect-auto md:h-full relative overflow-hidden rounded-2xl"
+                  className="group w-full max-w-[600px] aspect-square md:max-w-none md:aspect-auto md:h-full relative overflow-hidden rounded-2xl"
                 >
                   <motion.img 
                     src={bottle.showcaseImage} 

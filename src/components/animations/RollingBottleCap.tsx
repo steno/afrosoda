@@ -117,8 +117,8 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
       animate={isMobile ? undefined : controls}
       className={
         isMobile
-          ? 'absolute -bottom-10 left-1/2 -translate-x-1/2 w-32 h-32 cursor-pointer'
-          : 'absolute -bottom-10 w-32 h-32 cursor-pointer'
+          ? 'absolute -bottom-10 left-1/2 -translate-x-1/2 w-32 h-32'
+          : 'absolute -bottom-10 w-32 h-32'
       }
       style={{
         zIndex: 1001,
@@ -127,21 +127,28 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={handleClick}
     >
-      <motion.div
-        custom={direction}
-        variants={isMobile ? undefined : imageVariants}
-        initial={isMobile ? undefined : 'initial'}
-        animate={isMobile ? undefined : controls}
-        className="w-full h-full"
+      <button
+        type="button"
+        onClick={handleClick}
+        className="relative z-[2] block h-full w-full touch-manipulation border-0 bg-transparent p-0 cursor-pointer [-webkit-tap-highlight-color:transparent] appearance-none active:opacity-90"
+        aria-label="Toggle background music"
       >
-        <img
-          src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/game-cork.png"
-          alt="Rolling Bottle Cap"
-          className="w-full h-full"
-        />
-      </motion.div>
+        <motion.span
+          custom={direction}
+          variants={isMobile ? undefined : imageVariants}
+          initial={isMobile ? undefined : 'initial'}
+          animate={isMobile ? undefined : controls}
+          className="pointer-events-none block h-full w-full"
+        >
+          <img
+            src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/game-cork.png"
+            alt=""
+            className="h-full w-full"
+            draggable={false}
+          />
+        </motion.span>
+      </button>
       <AnimatePresence>
         {isHovering && !isMobile && (
           <motion.div
@@ -149,7 +156,7 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black/90 text-white text-sm px-3 py-1.5 rounded-lg whitespace-nowrap z-50"
+            className="pointer-events-none absolute -top-10 left-1/2 z-[1] -translate-x-1/2 bg-black/90 px-3 py-1.5 text-sm whitespace-nowrap text-white rounded-lg"
           >
             Toggle the Beat
             <div

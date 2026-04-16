@@ -47,7 +47,7 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile, scrollToTop }) => {
                 <Link to="/" onClick={scrollToTop}>
                   <img src="https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/logolight.png" 
                     alt="AfroSoda Logo"
-                    className="h-12"
+                    className="h-10"
                   />
                 </Link>
               </motion.div>

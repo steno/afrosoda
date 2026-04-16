@@ -76,28 +76,28 @@ function App() {
     }
   }, [soundsInitialized]);
 
-  // Initialize audio on first user interaction
+  // Prime audio on first user interaction (runs once)
+  const interactionHandledRef = useRef(false);
   useEffect(() => {
     const handleUserInteraction = () => {
+      if (interactionHandledRef.current) return;
+      interactionHandledRef.current = true;
+
       initializeAudio();
-      if (!soundsInitialized) {
-        Object.values(bottleSoundsRef.current).forEach(audio => {
-          if (audio) {
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-              playPromise
-                .then(() => {
-                  audio.pause();
-                  audio.currentTime = 0;
-                })
-                .catch(error => {
-                  console.error('Sound initialization failed:', error);
-                });
-            }
+      Object.values(bottleSoundsRef.current).forEach(audio => {
+        if (audio) {
+          const playPromise = audio.play();
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                audio.pause();
+                audio.currentTime = 0;
+              })
+              .catch(() => {});
           }
-        });
-        setSoundsInitialized(true);
-      }
+        }
+      });
+
       document.removeEventListener('click', handleUserInteraction);
       document.removeEventListener('touchstart', handleUserInteraction);
     };
@@ -109,7 +109,7 @@ function App() {
       document.removeEventListener('click', handleUserInteraction);
       document.removeEventListener('touchstart', handleUserInteraction);
     };
-  }, [initializeAudio, soundsInitialized]);
+  }, [initializeAudio]);
 
   // Track scroll position to determine active product
   useEffect(() => {

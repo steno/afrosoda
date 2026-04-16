@@ -32,11 +32,13 @@ const Hero: React.FC<HeroProps> = ({
   const initialMount = useRef(true);
 
   const nextBottle = () => {
+    initialMount.current = false;
     const nextIndex = (currentBottleIndex + 1) % bottles.length;
     setCurrentBottleIndex(nextIndex);
   };
 
   const prevBottle = () => {
+    initialMount.current = false;
     const prevIndex = (currentBottleIndex - 1 + bottles.length) % bottles.length;
     setCurrentBottleIndex(prevIndex);
   };
@@ -101,68 +103,67 @@ const Hero: React.FC<HeroProps> = ({
         {/* Mobile Bottle Slider */}
         {isMobile ? (
           <div className="flex flex-col items-center justify-center pb-4 flex-1">
-            <div className="relative w-full max-w-[300px] h-full mx-auto overflow-hidden">
-              <div className="absolute inset-0 pointer-events-none">
-                {Array.from({ length: 40 }, (_, i) => {
-                  const size = 4 + Math.random() * 12;
-                  return (
-                    <span
-                      key={i}
-                      className="absolute rounded-full bg-white/50 bubble-rise aspect-square"
-                      style={{
-                        width: size,
-                        height: size,
-                        left: `${Math.random() * 100}%`,
-                        bottom: 0,
-                        animationDelay: `${Math.random() * 3}s`,
-                        animationDuration: `${2 + Math.random() * 3}s`,
-                      }}
+            <div className="relative w-full max-w-[300px] h-full mx-auto">
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute inset-0 pointer-events-none">
+                  {Array.from({ length: 40 }, (_, i) => {
+                    const size = 4 + Math.random() * 12;
+                    return (
+                      <span
+                        key={i}
+                        className="absolute rounded-full bg-white/50 bubble-rise aspect-square"
+                        style={{
+                          width: size,
+                          height: size,
+                          left: `${Math.random() * 100}%`,
+                          bottom: 0,
+                          animationDelay: `${Math.random() * 3}s`,
+                          animationDuration: `${2 + Math.random() * 3}s`,
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentBottleIndex}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1, transition: { duration: initialMount.current ? 0.5 : 0.3, delay: initialMount.current ? 2 : 0 } }}
+                    exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
+                    onAnimationComplete={() => { initialMount.current = false; }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <img 
+                      src={bottles[currentBottleIndex].heroImage} 
+                      alt={t('products', 'bottles', bottles[currentBottleIndex].key as keyof typeof t.products.bottles).name}
+                      className="h-full object-contain cursor-pointer"
+                      onClick={handleBottleClick}
+                      onKeyDown={handleKeyDown}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`View ${t('products', 'bottles', bottles[currentBottleIndex].key as keyof typeof t.products.bottles).name} details`}
                     />
-                  );
-                })}
+                  </motion.div>
+                </AnimatePresence>
               </div>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentBottleIndex}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: initialMount.current ? 0.5 : 0.3, delay: initialMount.current ? 2 : 0 }}
-                  onAnimationComplete={() => { initialMount.current = false; }}
-                  className="absolute inset-0 flex items-center justify-center"
-                >
-                  <img 
-                    src={bottles[currentBottleIndex].heroImage} 
-                    alt={t('products', 'bottles', bottles[currentBottleIndex].key as keyof typeof t.products.bottles).name}
-                    className="h-full object-contain cursor-pointer"
-                    onClick={handleBottleClick}
-                    onKeyDown={handleKeyDown}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`View ${t('products', 'bottles', bottles[currentBottleIndex].key as keyof typeof t.products.bottles).name} details`}
-                  />
-                </motion.div>
-              </AnimatePresence>
               
-              <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between pointer-events-none">
+              <div className="absolute inset-y-0 -left-8 -right-8 flex items-center justify-between pointer-events-none z-10">
                 <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileTap={{ scale: 0.85 }}
                   onClick={prevBottle}
-                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center pointer-events-auto ml-2"
+                  className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center pointer-events-auto shadow-lg active:bg-black/60"
                   aria-label="Previous bottle"
                 >
-                  <ChevronLeft className="w-6 h-6" />
+                  <ChevronLeft className="w-7 h-7 text-white" />
                 </motion.button>
                 
                 <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileTap={{ scale: 0.85 }}
                   onClick={nextBottle}
-                  className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center pointer-events-auto mr-2"
+                  className="w-14 h-14 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center pointer-events-auto shadow-lg active:bg-black/60"
                   aria-label="Next bottle"
                 >
-                  <ChevronRight className="w-6 h-6" />
+                  <ChevronRight className="w-7 h-7 text-white" />
                 </motion.button>
               </div>
             </div>

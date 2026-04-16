@@ -120,12 +120,10 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const toggleSound = () => {
-    if (!isInitialized) {
-      initializeAudio();
-      return;
-    }
-
     if (audioRef.current) {
+      if (!isInitialized) {
+        setIsInitialized(true);
+      }
       if (isPlaying) {
         fadeOut(audioRef.current);
       } else {

@@ -13,22 +13,22 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
   const { toggleSound } = useAudio();
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [isHovering, setIsHovering] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   
-  // Create Audio object
   const sound = useRef(new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/bottleopening.mp3'));
 
-  // Update viewport width on resize
   useEffect(() => {
-    const handleResize = () => setViewportWidth(window.innerWidth);
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+      setIsMobile(window.innerWidth < 768);
+    };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Bottle cap width (matches w-32 = 128px in Tailwind)
   const bottleCapWidth = 128;
 
-  // Calculate animation boundaries (keep bottle cap fully visible)
   const leftBound = 0;
   const rightBound = viewportWidth - bottleCapWidth;
 
@@ -52,8 +52,9 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
     }),
   };
 
-  // Manage animation loop
   useEffect(() => {
+    if (isMobile) return;
+
     let isMounted = true;
 
     const animate = async () => {
@@ -75,9 +76,10 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
       }
       controls.stop();
     };
-  }, [controls, direction, isHovering, startDelay]);
+  }, [controls, direction, isHovering, startDelay, isMobile]);
 
   const handleMouseEnter = () => {
+    if (isMobile) return;
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -86,6 +88,7 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
   };
 
   const handleMouseLeave = () => {
+    if (isMobile) return;
     setIsHovering(false);
   };
 
@@ -94,22 +97,29 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
+    sound.current.currentTime = 0;
     sound.current.play().catch(error => console.error('Error playing sound:', error));
-    setIsHovering(true);
-    controls.stop();
-    timeoutRef.current = setTimeout(() => {
-      setIsHovering(false);
-    }, 2000);
+    if (!isMobile) {
+      setIsHovering(true);
+      controls.stop();
+      timeoutRef.current = setTimeout(() => {
+        setIsHovering(false);
+      }, 2000);
+    }
   };
 
   return (
     <motion.div
       ref={ref}
       custom={direction}
-      variants={wrapperVariants}
-      initial="initial"
-      animate={controls}
-      className="absolute -bottom-10 w-32 h-32 cursor-pointer"
+      variants={isMobile ? undefined : wrapperVariants}
+      initial={isMobile ? undefined : 'initial'}
+      animate={isMobile ? undefined : controls}
+      className={
+        isMobile
+          ? 'absolute -bottom-10 left-1/2 -translate-x-1/2 w-32 h-32 cursor-pointer'
+          : 'absolute -bottom-10 w-32 h-32 cursor-pointer'
+      }
       style={{
         zIndex: 1001,
         pointerEvents: 'auto',
@@ -121,9 +131,9 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
     >
       <motion.div
         custom={direction}
-        variants={imageVariants}
-        initial="initial"
-        animate={controls}
+        variants={isMobile ? undefined : imageVariants}
+        initial={isMobile ? undefined : 'initial'}
+        animate={isMobile ? undefined : controls}
         className="w-full h-full"
       >
         <img
@@ -133,7 +143,7 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
         />
       </motion.div>
       <AnimatePresence>
-        {isHovering && (
+        {isHovering && !isMobile && (
           <motion.div
             role="tooltip"
             initial={{ opacity: 0, y: 10 }}

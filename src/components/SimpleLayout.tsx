@@ -85,7 +85,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
             </div>
 
             {/* Desktop page links; hamburger only on small screens */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3 sm:gap-6">
               <div className="hidden md:flex items-center gap-6 text-sm font-medium">
                 <Link
                   to="/about"
@@ -102,6 +102,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
                   {language === 'en' ? 'Contact' : 'Kontakt'}
                 </Link>
               </div>
+              <AudioControls variant="nav" />
               <button
                 onClick={() => setLanguage(language === 'en' ? 'de' : 'en')}
                 className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
@@ -122,9 +123,6 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
           </div>
         </div>
       </nav>
-
-      {/* Sound Controls */}
-      <AudioControls />
 
       {/* Full Screen Menu */}
       <AnimatePresence>
@@ -217,7 +215,7 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
             {/* Content */}
             <div className="relative z-10 h-full flex items-center justify-center px-6">
               <div className="w-full max-w-2xl px-8 py-10 md:px-12 md:py-14 backdrop-blur-xl bg-white/10 rounded-[2rem] border border-white/15 shadow-2xl">
-                <div className="flex items-center justify-between mb-12">
+                <div className="flex items-center justify-between gap-3 mb-12">
                   <Link
                     to="/"
                     onClick={() => {
@@ -231,12 +229,17 @@ const SimpleLayout: React.FC<SimpleLayoutProps> = ({ children }) => {
                       className="h-[2em] w-auto"
                     />
                   </Link>
-                  <button
-                    onClick={() => setIsMenuOpen(false)}
-                    className="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-colors"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
+                  <div className="flex shrink-0 items-center gap-1">
+                    <AudioControls variant="nav" />
+                    <button
+                      type="button"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/25"
+                      aria-label="Close menu"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-12">

@@ -50,12 +50,6 @@ h1 {
   animation: slidePattern 30s linear infinite;
 }
 
-@media (max-width: 767px) {
-  .pattern-slide {
-    animation: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .pattern-slide {
     animation: none;

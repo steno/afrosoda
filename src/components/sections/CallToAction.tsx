@@ -1,18 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from '../../hooks/useTranslation';
+import { useAudio } from '../../context/AudioContext';
 
 const CallToAction: React.FC = () => {
   const { t } = useTranslation();
+  const { isPlaying } = useAudio();
 
   return (
     <section className="pt-0 pb-20 px-0 bg-[#c91713]">
         {/* Decorative Pattern Bar */}
       <div className="relative w-full h-12 md:h-12 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-repeat-x pattern-slide"
+        <div
+          className={`absolute inset-0 bg-repeat-x${isPlaying ? ' pattern-slide' : ''}`}
           style={{
-            backgroundImage: `url('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/pattern.png ')`,
+            backgroundImage: `url('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/pattern.png')`,
             backgroundSize: 'auto 80%',
           }}
         />

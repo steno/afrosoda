@@ -64,7 +64,7 @@ export const de: Translation = {
   },
   about: {
     hero: {
-      title: 'Unsere Geschichte',
+      title: 'AfroSoda Story',
       subtitle: 'Wir bringen die lebendigen Aromen und Rhythmen Afrikas in die Welt, einen Schluck nach dem anderen.'
     },
     story: {

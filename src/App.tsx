@@ -16,7 +16,7 @@ function App() {
   const [hoveredBottle, setHoveredBottle] = useState<string | null>(null);
   const [soundsInitialized, setSoundsInitialized] = useState(false);
   const { t } = useTranslation(language);
-  const { initializeAudio } = useAudio();
+  const { initializeAudio, isPlaying } = useAudio();
   const [isMobile, setIsMobile] = useState(false);
   const [currentBottleIndex, setCurrentBottleIndex] = useState(0);
   const [activeProductKey, setActiveProductKey] = useState<string | null>(null);
@@ -262,7 +262,7 @@ function App() {
         />
         <div className="relative w-full h-12 md:h-12 overflow-hidden">
           <div
-            className="absolute inset-0 bg-repeat-x pattern-slide"
+            className={`absolute inset-0 bg-repeat-x${isPlaying ? ' pattern-slide' : ''}`}
             style={{
               backgroundImage: `url('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/pattern.png')`,
               backgroundSize: 'auto 80%',

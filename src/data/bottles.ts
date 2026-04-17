@@ -31,7 +31,7 @@ export const bottles = [
   },
   {
     color: 'from-[#f5821f] to-[#ffcc00]',
-    buttonColor: '#f5821f',
+    buttonColor: '#ff8c00',
     gradientBg:
       'bg-[linear-gradient(180deg,#f5821f_0%,#f9a825_50%,#ffcc00_100%)]',
     key: 'magicMango',
@@ -41,7 +41,7 @@ export const bottles = [
   },
   {
     color: 'from-[#ffcc00] to-[#f5821f]',
-    buttonColor: '#ffcc00',
+    buttonColor: '#ffb366',
     gradientBg:
       'bg-[linear-gradient(180deg,#ffcc00_0%,#f9a825_50%,#f5821f_100%)]',
     key: 'bubbleBanana',
@@ -51,7 +51,7 @@ export const bottles = [
   },
   {
     color: 'from-[#b5cf00] to-[#ffcc00]',
-    buttonColor: '#b5cf00',
+    buttonColor: '#4d833f',
     gradientBg:
       'bg-[linear-gradient(180deg,#8aab00_0%,#b5cf00_45%,#ffcc00_100%)]',
     key: 'kinkyCocomut',

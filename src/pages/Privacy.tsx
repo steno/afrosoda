@@ -49,7 +49,7 @@ const PrivacyPage: React.FC = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-5xl font-bold text-center mb-6 mt-8 font-heading"
-            style={{ color: 'coral' }}
+            style={{ color: 'antiquewhite' }}
           >
             {getString(t('privacy', 'hero', 'title'))}
           </motion.h1>

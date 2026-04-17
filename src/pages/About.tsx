@@ -129,7 +129,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-20 px-4 bg-[antiquewhite]">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ y: 50, opacity: 0 }}

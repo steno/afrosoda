@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { useLanguage } from '../../context/LanguageContext';
+import { useAnimationContext } from '../../context/AnimationContext';
 import Bubble from '../animations/Bubble';
 import RollingBottleCap from '../animations/RollingBottleCap';
 import Sunburst from '../animations/Sunburst';
@@ -32,6 +33,7 @@ const Hero: React.FC<HeroProps> = ({
   const { t } = useTranslation();
   const initialMount = useRef(true);
   const { playFizz, stopFizz } = useSodaFizzHover(SODA_FIZZ_SOUND_URL);
+  const { isHeroBottleAnimationEnabled } = useAnimationContext();
 
   const bubbleConfigs = useMemo(() => {
     const count = isMobile ? 28 : 72;
@@ -195,7 +197,7 @@ const Hero: React.FC<HeroProps> = ({
               <motion.div
                 key={bottle.key}
                 initial={{ y: 100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
+                animate={{ y: isHeroBottleAnimationEnabled ? -20 : 0, opacity: 1 }}
                 transition={{ delay: 2 + index * 0.2, duration: 0.8 }}
                 whileHover={{ 
                   y: -20,
@@ -218,13 +220,18 @@ const Hero: React.FC<HeroProps> = ({
                 <motion.div 
                   className="w-[90px] md:w-[180px] lg:w-[240px] xl:w-[280px] h-[240px] md:h-[450px] lg:h-[600px] xl:h-[700px] relative overflow-hidden"
                   whileHover={{ scale: 1.1 }}
+                  animate={{ scale: isHeroBottleAnimationEnabled ? 1.1 : 1 }}
                 >
                   <img 
                     src={bottle.heroImage} 
                     alt={t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
                     className="absolute inset-0 w-full h-full object-contain"
                   />
-                  <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div
+                    className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${
+                      isHeroBottleAnimationEnabled ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                    }`}
+                  >
                     {Array.from({ length: 36 }, (_, i) => {
                       const size = 4 + Math.random() * 12;
                       return (
@@ -247,6 +254,7 @@ const Hero: React.FC<HeroProps> = ({
                 <motion.h1
                   initial={{ opacity: 0, y: 10 }}
                   whileHover={{ opacity: 1, y: 0 }}
+                  animate={isHeroBottleAnimationEnabled ? { opacity: 1, y: 0 } : undefined}
                   className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-sm font-medium"
                   style={{ color: '#cb2626', fontSize: '0.875rem', lineHeight: '1.25rem' }}
                 >

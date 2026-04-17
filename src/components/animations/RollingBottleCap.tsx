@@ -17,7 +17,7 @@ interface RollingBottleCapProps {
 const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { toggleSound } = useAudio();
-  const { toggleShowcaseHover } = useAnimationContext();
+  const { toggleShowcaseHover, toggleHeroBottleAnimation } = useAnimationContext();
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [isHovering, setIsHovering] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -103,6 +103,7 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
   const handleClick = () => {
     toggleSound();
     toggleShowcaseHover();
+    toggleHeroBottleAnimation();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }

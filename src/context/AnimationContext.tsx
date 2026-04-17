@@ -5,6 +5,8 @@ interface AnimationContextType {
   toggleAnimations: () => void;
   isShowcaseHoverEnabled: boolean;
   toggleShowcaseHover: () => void;
+  isHeroBottleAnimationEnabled: boolean;
+  toggleHeroBottleAnimation: () => void;
   registerSunburstReplay: (fn: (reveal: boolean) => void) => void;
   replaySunburst: (reveal: boolean) => void;
 }
@@ -14,6 +16,8 @@ const AnimationContext = createContext<AnimationContextType>({
   toggleAnimations: () => {},
   isShowcaseHoverEnabled: false,
   toggleShowcaseHover: () => {},
+  isHeroBottleAnimationEnabled: false,
+  toggleHeroBottleAnimation: () => {},
   registerSunburstReplay: () => {},
   replaySunburst: () => {},
 });
@@ -26,6 +30,7 @@ function getPrefersReducedMotion(): boolean {
 export const AnimationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAnimationEnabled, setIsAnimationEnabled] = useState(() => !getPrefersReducedMotion());
   const [isShowcaseHoverEnabled, setIsShowcaseHoverEnabled] = useState(false);
+  const [isHeroBottleAnimationEnabled, setIsHeroBottleAnimationEnabled] = useState(false);
   const sunburstReplayRef = useRef<((reveal: boolean) => void) | null>(null);
 
   useEffect(() => {
@@ -43,6 +48,10 @@ export const AnimationProvider: React.FC<{ children: ReactNode }> = ({ children 
     setIsShowcaseHoverEnabled(prev => !prev);
   };
 
+  const toggleHeroBottleAnimation = () => {
+    setIsHeroBottleAnimationEnabled(prev => !prev);
+  };
+
   const registerSunburstReplay = useCallback((fn: (reveal: boolean) => void) => {
     sunburstReplayRef.current = fn;
   }, []);
@@ -58,6 +67,8 @@ export const AnimationProvider: React.FC<{ children: ReactNode }> = ({ children 
         toggleAnimations,
         isShowcaseHoverEnabled,
         toggleShowcaseHover,
+        isHeroBottleAnimationEnabled,
+        toggleHeroBottleAnimation,
         registerSunburstReplay,
         replaySunburst,
       }}

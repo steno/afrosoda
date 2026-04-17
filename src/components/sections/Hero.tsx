@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
@@ -57,6 +57,40 @@ const Hero: React.FC<HeroProps> = ({
     setCurrentBottleIndex(prevIndex);
   };
 
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const touchLastRef = useRef<{ x: number; y: number } | null>(null);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    const t = e.touches[0];
+    if (!t) return;
+    touchStartRef.current = { x: t.clientX, y: t.clientY };
+    touchLastRef.current = { x: t.clientX, y: t.clientY };
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    const t = e.touches[0];
+    if (!t) return;
+    touchLastRef.current = { x: t.clientX, y: t.clientY };
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    const start = touchStartRef.current;
+    const last = touchLastRef.current;
+    touchStartRef.current = null;
+    touchLastRef.current = null;
+    if (!start || !last) return;
+
+    const dx = last.x - start.x;
+    const dy = last.y - start.y;
+
+    // Guard against accidental horizontal swipes during vertical scrolling.
+    if (Math.abs(dy) > Math.abs(dx)) return;
+
+    const SWIPE_THRESHOLD_PX = 40;
+    if (dx <= -SWIPE_THRESHOLD_PX) nextBottle();
+    if (dx >= SWIPE_THRESHOLD_PX) prevBottle();
+  }, [nextBottle, prevBottle]);
+
   const handleBottleClick = () => {
     const bottleKey = bottles[currentBottleIndex].key;
     playBottleSound(bottleKey); // Play sound on click
@@ -114,7 +148,14 @@ const Hero: React.FC<HeroProps> = ({
         {isMobile ? (
           <div className="flex flex-col items-center justify-center pb-4 flex-1">
             <div className="relative w-full max-w-[300px] h-full mx-auto">
-              <div className="absolute inset-0 overflow-hidden">
+              <div
+                className="absolute inset-0 overflow-hidden"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                style={{ touchAction: 'pan-y' }}
+                aria-label="Swipe to change bottle"
+              >
                 <div className="absolute inset-0 pointer-events-none">
                   {Array.from({ length: 14 }, (_, i) => {
                     const size = 4 + Math.random() * 12;

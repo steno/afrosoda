@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from '../../hooks/useTranslation';
 import { useLanguage } from '../../context/LanguageContext';
 import FullScreenMenu from './FullScreenMenu';
+import AudioControls from '../AudioControls';
 
 interface NavigationProps {
   isMobile: boolean;
@@ -70,6 +71,7 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile, scrollToTop }) => {
                   {language === 'en' ? 'Contact' : 'Kontakt'}
                 </Link>
               </div>
+              <AudioControls variant="nav" />
               <button
                 onClick={() => setLanguage(language === 'en' ? 'de' : 'en')}
                 className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"

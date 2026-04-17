@@ -1,20 +1,28 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { motion, useAnimation, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from 'framer-motion';
 import { useAudio } from '../../context/AudioContext';
+import { useAnimationContext } from '../../context/AnimationContext';
 
 interface RollingBottleCapProps {
   startDelay?: number;
 }
 
 const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) => {
-  const controls = useAnimation();
   const ref = useRef<HTMLDivElement>(null);
-  const [direction, setDirection] = useState<'left' | 'right'>(Math.random() > 0.5 ? 'left' : 'right');
   const { toggleSound } = useAudio();
+  const { toggleShowcaseHover } = useAnimationContext();
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [isHovering, setIsHovering] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const prefersReducedMotion = useReducedMotion();
   
   const sound = useRef(new Audio('https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/music/bottleopening.mp3'));
 
@@ -32,51 +40,52 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
   const leftBound = 0;
   const rightBound = viewportWidth - bottleCapWidth;
 
-  const wrapperVariants = {
-    animate: (dir: 'left' | 'right') => ({
-      x: dir === 'left' ? leftBound : rightBound,
-      transition: { x: { duration: 5, ease: 'linear' } },
-    }),
-    initial: (dir: 'left' | 'right') => ({
-      x: dir === 'left' ? rightBound : leftBound,
-    }),
-  };
+  const initialX = useMemo(() => {
+    if (isMobile) return 0;
+    const centered = window.innerWidth / 2 - bottleCapWidth / 2;
+    return Math.min(rightBound, Math.max(leftBound, centered));
+  }, [bottleCapWidth, isMobile, leftBound, rightBound]);
 
-  const imageVariants = {
-    animate: (dir: 'left' | 'right') => ({
-      rotate: dir === 'left' ? -1080 : 1080,
-      transition: { rotate: { duration: 5, ease: 'linear' } },
-    }),
-    initial: () => ({
-      rotate: 0,
-    }),
-  };
+  const xTarget = useMotionValue(initialX);
+  const x = useSpring(xTarget, prefersReducedMotion ? { stiffness: 1000, damping: 200 } : { stiffness: 260, damping: 30 });
+  const rotate = useTransform(x, [leftBound, rightBound], [-360, 360]);
 
   useEffect(() => {
     if (isMobile) return;
 
-    let isMounted = true;
+    // Ensure we don't animate from a stale width after resizes.
+    xTarget.set(initialX);
 
-    const animate = async () => {
-      if (!isMounted || isHovering) return;
-      await controls.start('animate');
-      setDirection(prev => (prev === 'left' ? 'right' : 'left'));
-      if (isMounted && !isHovering) {
-        animate();
-      }
+    let raf = 0;
+    let lastClientX = 0;
+    let started = false;
+
+    const update = () => {
+      raf = 0;
+      const desired = Math.min(rightBound, Math.max(leftBound, lastClientX - bottleCapWidth / 2));
+      xTarget.set(desired);
     };
 
-    const initialTimeout = setTimeout(animate, startDelay * 1000);
+    const handleMouseMove = (e: MouseEvent) => {
+      lastClientX = e.clientX;
+      if (!started) {
+        started = true;
+        if (startDelay > 0) {
+          window.setTimeout(() => {
+            if (!raf) raf = window.requestAnimationFrame(update);
+          }, startDelay * 1000);
+          return;
+        }
+      }
+      if (!raf) raf = window.requestAnimationFrame(update);
+    };
 
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => {
-      isMounted = false;
-      clearTimeout(initialTimeout);
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-      controls.stop();
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (raf) window.cancelAnimationFrame(raf);
     };
-  }, [controls, direction, isHovering, startDelay, isMobile]);
+  }, [bottleCapWidth, initialX, isMobile, leftBound, rightBound, startDelay, xTarget]);
 
   const handleMouseEnter = () => {
     if (isMobile) return;
@@ -84,7 +93,6 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
       clearTimeout(timeoutRef.current);
     }
     setIsHovering(true);
-    controls.stop();
   };
 
   const handleMouseLeave = () => {
@@ -94,6 +102,7 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
 
   const handleClick = () => {
     toggleSound();
+    toggleShowcaseHover();
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -101,7 +110,6 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
     sound.current.play().catch(error => console.error('Error playing sound:', error));
     if (!isMobile) {
       setIsHovering(true);
-      controls.stop();
       timeoutRef.current = setTimeout(() => {
         setIsHovering(false);
       }, 2000);
@@ -111,10 +119,6 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
   return (
     <motion.div
       ref={ref}
-      custom={direction}
-      variants={isMobile ? undefined : wrapperVariants}
-      initial={isMobile ? undefined : 'initial'}
-      animate={isMobile ? undefined : controls}
       className={
         isMobile
           ? 'absolute -bottom-10 left-1/2 -translate-x-1/2 w-32 h-32'
@@ -124,6 +128,7 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
         zIndex: 1001,
         pointerEvents: 'auto',
         opacity: 1,
+        x: isMobile ? undefined : x,
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -135,10 +140,7 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
         aria-label="Toggle background music"
       >
         <motion.span
-          custom={direction}
-          variants={isMobile ? undefined : imageVariants}
-          initial={isMobile ? undefined : 'initial'}
-          animate={isMobile ? undefined : controls}
+          style={{ rotate: isMobile ? 0 : rotate }}
           className="pointer-events-none block h-full w-full"
         >
           <img

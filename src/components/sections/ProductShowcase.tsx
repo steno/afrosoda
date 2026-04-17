@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from '../../hooks/useTranslation';
 import { useLanguage } from '../../context/LanguageContext';
+import { useAnimationContext } from '../../context/AnimationContext';
 import { bottles, SODA_FIZZ_SOUND_URL, VEGAN_BADGE_IMAGE_URL } from '../../data/bottles';
 import { useSodaFizzHover } from '../../hooks/useSodaFizzHover';
 import ExternalLink from '../ExternalLink';
@@ -14,6 +15,7 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
   const { language } = useLanguage();
   const { t } = useTranslation();
   const { playFizz, stopFizz } = useSodaFizzHover(SODA_FIZZ_SOUND_URL);
+  const { isShowcaseHoverEnabled } = useAnimationContext();
 
   return (
     <section 
@@ -62,7 +64,11 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
                     alt={t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
                     className="absolute inset-0 z-[1] h-full w-full origin-center scale-[1.296] object-contain object-center"
                   />
-                  <div className="absolute inset-0 pointer-events-none z-[2] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div
+                    className={`absolute inset-0 pointer-events-none z-[2] transition-opacity duration-300 ${
+                      isShowcaseHoverEnabled ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                    }`}
+                  >
                     {Array.from({ length: 36 }, (_, i) => {
                       const size = 4 + Math.random() * 12;
                       return (

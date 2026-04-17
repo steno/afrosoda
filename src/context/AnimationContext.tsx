@@ -3,6 +3,8 @@ import React, { createContext, useState, useContext, useRef, useCallback, useEff
 interface AnimationContextType {
   isAnimationEnabled: boolean;
   toggleAnimations: () => void;
+  isShowcaseHoverEnabled: boolean;
+  toggleShowcaseHover: () => void;
   registerSunburstReplay: (fn: (reveal: boolean) => void) => void;
   replaySunburst: (reveal: boolean) => void;
 }
@@ -10,6 +12,8 @@ interface AnimationContextType {
 const AnimationContext = createContext<AnimationContextType>({
   isAnimationEnabled: true,
   toggleAnimations: () => {},
+  isShowcaseHoverEnabled: false,
+  toggleShowcaseHover: () => {},
   registerSunburstReplay: () => {},
   replaySunburst: () => {},
 });
@@ -21,6 +25,7 @@ function getPrefersReducedMotion(): boolean {
 
 export const AnimationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isAnimationEnabled, setIsAnimationEnabled] = useState(() => !getPrefersReducedMotion());
+  const [isShowcaseHoverEnabled, setIsShowcaseHoverEnabled] = useState(false);
   const sunburstReplayRef = useRef<((reveal: boolean) => void) | null>(null);
 
   useEffect(() => {
@@ -34,6 +39,10 @@ export const AnimationProvider: React.FC<{ children: ReactNode }> = ({ children 
     setIsAnimationEnabled(prev => !prev);
   };
 
+  const toggleShowcaseHover = () => {
+    setIsShowcaseHoverEnabled(prev => !prev);
+  };
+
   const registerSunburstReplay = useCallback((fn: (reveal: boolean) => void) => {
     sunburstReplayRef.current = fn;
   }, []);
@@ -43,7 +52,16 @@ export const AnimationProvider: React.FC<{ children: ReactNode }> = ({ children 
   }, []);
 
   return (
-    <AnimationContext.Provider value={{ isAnimationEnabled, toggleAnimations, registerSunburstReplay, replaySunburst }}>
+    <AnimationContext.Provider
+      value={{
+        isAnimationEnabled,
+        toggleAnimations,
+        isShowcaseHoverEnabled,
+        toggleShowcaseHover,
+        registerSunburstReplay,
+        replaySunburst,
+      }}
+    >
       {children}
     </AnimationContext.Provider>
   );

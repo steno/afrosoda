@@ -32,6 +32,8 @@ const Hero: React.FC<HeroProps> = ({
   const { language } = useLanguage();
   const { t } = useTranslation();
   const initialMount = useRef(true);
+  /** 1 = next (enter from right, exit left); -1 = prev (enter from left, exit right). */
+  const mobileSlideDirRef = useRef<1 | -1>(1);
   const { playFizz, stopFizz } = useSodaFizzHover(SODA_FIZZ_SOUND_URL);
   const { isHeroBottleAnimationEnabled } = useAnimationContext();
 
@@ -47,12 +49,14 @@ const Hero: React.FC<HeroProps> = ({
 
   const nextBottle = () => {
     initialMount.current = false;
+    mobileSlideDirRef.current = 1;
     const nextIndex = (currentBottleIndex + 1) % bottles.length;
     setCurrentBottleIndex(nextIndex);
   };
 
   const prevBottle = () => {
     initialMount.current = false;
+    mobileSlideDirRef.current = -1;
     const prevIndex = (currentBottleIndex - 1 + bottles.length) % bottles.length;
     setCurrentBottleIndex(prevIndex);
   };
@@ -178,10 +182,27 @@ const Hero: React.FC<HeroProps> = ({
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentBottleIndex}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1, transition: { duration: initialMount.current ? 0.5 : 0.3, delay: initialMount.current ? 2 : 0 } }}
-                    exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
-                    onAnimationComplete={() => { initialMount.current = false; }}
+                    initial={
+                      initialMount.current
+                        ? { opacity: 0, x: 0 }
+                        : { opacity: 0, x: mobileSlideDirRef.current === 1 ? '100%' : '-100%' }
+                    }
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        duration: initialMount.current ? 0.5 : 0.3,
+                        delay: initialMount.current ? 2 : 0,
+                      },
+                    }}
+                    exit={{
+                      opacity: 0,
+                      x: mobileSlideDirRef.current === 1 ? '-100%' : '100%',
+                      transition: { duration: 0.22 },
+                    }}
+                    onAnimationComplete={() => {
+                      initialMount.current = false;
+                    }}
                     className="absolute inset-0 flex items-center justify-center"
                   >
                     <img 

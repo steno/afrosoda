@@ -55,14 +55,14 @@ const ProductShowcase: React.FC<ProductShowcaseProps> = ({ productRefs }) => {
               {/* Bottle Display */}
               <div className="w-full md:w-1/2 flex justify-center md:self-stretch">
                 <div
-                  className="group w-full max-w-[600px] aspect-square md:max-w-none md:aspect-auto md:h-full relative overflow-hidden rounded-2xl"
+                  className="group w-full max-w-[600px] aspect-[3/4] md:max-w-none md:aspect-auto md:h-full relative overflow-hidden rounded-2xl"
                   onMouseEnter={playFizz}
                   onMouseLeave={stopFizz}
                 >
                   <motion.img 
                     src={bottle.showcaseImage} 
                     alt={t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
-                    className="absolute inset-0 z-[1] h-full w-full origin-center scale-[1.296] object-contain object-center"
+                    className="absolute inset-0 z-[1] h-full w-full origin-center scale-100 object-cover object-center md:scale-[1.296]"
                   />
                   <div
                     className={`absolute inset-0 pointer-events-none z-[2] transition-opacity duration-300 ${

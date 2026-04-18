@@ -122,14 +122,14 @@ const RollingBottleCap: React.FC<RollingBottleCapProps> = ({ startDelay = 0 }) =
       ref={ref}
       className={
         isMobile
-          ? 'absolute -bottom-10 left-1/2 -translate-x-1/2 w-32 h-32'
+          ? 'absolute -bottom-10 left-[calc(50%-4rem)] w-32 h-32'
           : 'absolute -bottom-10 w-32 h-32'
       }
       style={{
         zIndex: 1001,
         pointerEvents: 'auto',
         opacity: 1,
-        x: isMobile ? undefined : x,
+        x: isMobile ? 0 : x,
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

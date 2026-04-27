@@ -25,7 +25,8 @@ export const bottles = [
     gradientBg:
       'bg-[linear-gradient(180deg,#c91713_0%,#e85d04_50%,#f5821f_100%)]',
     key: 'goldenHibiscus',
-    heroImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-hibiscus.png?auto=format&fit=crop&w=800&q=80',
+    heroImage:
+      'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-hibiscus.png?auto=format&w=900&q=80',
     showcaseImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/hib-detail.png?auto=format&fit=crop&w=1200&h=1200&q=80',
     link: 'https://www.africadrinks.de/golden-hibiskus'  // Hibiscus
   },
@@ -35,7 +36,8 @@ export const bottles = [
     gradientBg:
       'bg-[linear-gradient(180deg,#f5821f_0%,#f9a825_50%,#ffcc00_100%)]',
     key: 'magicMango',
-    heroImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-mango.png?auto=format&fit=crop&w=800&q=80',
+    heroImage:
+      'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-mango.png?auto=format&w=900&q=80',
     showcaseImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/mango-detail.png?auto=format&fit=crop&w=1200&h=1200&q=80',
     link: 'https://www.africadrinks.de/magic-mango'  // Mango
   },
@@ -45,7 +47,8 @@ export const bottles = [
     gradientBg:
       'bg-[linear-gradient(180deg,#ffcc00_0%,#f9a825_50%,#f5821f_100%)]',
     key: 'bubbleBanana',
-    heroImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-banana.png?auto=format&fit=crop&w=800&q=80',
+    heroImage:
+      'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-banana.png?auto=format&w=900&q=80',
     showcaseImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/banana-detail.png?auto=format&fit=crop&w=1200&h=1200&q=80',
     link: 'https://www.africadrinks.de/bubble-banana'  // Banana
   },
@@ -55,7 +58,8 @@ export const bottles = [
     gradientBg:
       'bg-[linear-gradient(180deg,#8aab00_0%,#b5cf00_45%,#ffcc00_100%)]',
     key: 'kinkyCocomut',
-    heroImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-coco.png?auto=format&fit=crop&w=800&q=80',
+    heroImage:
+      'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/single-coco.png?auto=format&w=900&q=80',
     showcaseImage: 'https://frdmalzedskscaopornt.supabase.co/storage/v1/object/public/media/images/coco-detail.png?auto=format&fit=crop&w=1200&h=1200&q=80',
     link: 'https://www.africadrinks.de/kinky-coconut'  // Coconut
   },

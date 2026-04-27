@@ -2,7 +2,6 @@ import React, { useRef, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
-import { useLanguage } from '../../context/LanguageContext';
 import { useAnimationContext } from '../../context/AnimationContext';
 import Bubble from '../animations/Bubble';
 import RollingBottleCap from '../animations/RollingBottleCap';
@@ -29,7 +28,6 @@ const Hero: React.FC<HeroProps> = ({
   playBottleSound,
   scrollToProduct
 }) => {
-  const { language } = useLanguage();
   const { t } = useTranslation();
   const initialMount = useRef(true);
   /** 1 = next (enter from right, exit left); -1 = prev (enter from left, exit right). */
@@ -123,23 +121,17 @@ const Hero: React.FC<HeroProps> = ({
         <RollingBottleCap startDelay={2 + (bottles.length - 1) * 0.2 + 0.8} />
       </div>
       
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 flex flex-col justify-between h-full min-h-0 pb-3 md:pb-6">
-        <div className="pt-20 md:pt-20 flex-none flex flex-col justify-start shrink-0">
+      <div className="relative z-10 mx-auto flex h-full min-h-0 w-full max-w-6xl flex-col justify-between px-4 pb-3 md:max-w-none md:px-6 md:pb-0 lg:px-10 lg:pb-1 xl:px-14">
+        <div className="flex shrink-0 flex-col justify-start pt-20 md:mx-auto md:max-w-4xl md:w-full md:pt-20">
           <motion.div
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="text-center mt-2 md:mt-6 relative z-20"
+            className="relative z-20 mt-2 text-center md:mt-4"
           >
             <motion.h1
-              animate={{
-                x: hoveredBottle
-                  ? (bottles.findIndex(b => b.key === hoveredBottle) - (bottles.length - 1) / 2) * 280
-                  : 0,
-              }}
-              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-              className="text-xl md:text-3xl font-normal"
-              style={{ color: '#cb2626', fontSize: undefined, lineHeight: undefined }}
+              className="mx-auto max-w-[90vw] text-xl md:text-3xl font-normal"
+              style={{ color: '#cb2626' }}
             >
               {isMobile
                 ? t('products', 'bottles', bottles[currentBottleIndex].key as keyof typeof t.products.bottles).name
@@ -203,12 +195,15 @@ const Hero: React.FC<HeroProps> = ({
                     onAnimationComplete={() => {
                       initialMount.current = false;
                     }}
-                    className="absolute inset-0 flex items-center justify-center"
+                    className="absolute inset-0 flex items-center justify-center px-1"
                   >
                     <img 
                       src={bottles[currentBottleIndex].heroImage} 
                       alt={t('products', 'bottles', bottles[currentBottleIndex].key as keyof typeof t.products.bottles).name}
-                      className="h-full object-contain cursor-pointer"
+                      width={450}
+                      height={1400}
+                      decoding="async"
+                      className="max-h-full w-auto max-w-full object-contain object-bottom cursor-pointer"
                       onClick={handleBottleClick}
                       onKeyDown={handleKeyDown}
                       onMouseEnter={playFizz}
@@ -254,7 +249,10 @@ const Hero: React.FC<HeroProps> = ({
             </div>
           </div>
         ) : (
-          <div className="hidden md:flex justify-center items-end gap-1 md:gap-2 lg:gap-3 xl:gap-4 px-4 pt-2 pb-14 md:pb-16 lg:pb-20">
+          <div className="hidden min-h-0 w-full flex-1 flex-col justify-end pb-0 md:flex md:pb-1 lg:pb-2">
+            <div
+              className="flex min-h-0 w-full flex-1 items-stretch justify-between gap-2 pt-0 md:gap-4 lg:gap-6 xl:gap-10 2xl:gap-12"
+            >
             {bottles.map((bottle, index) => (
               <motion.div
                 key={bottle.key}
@@ -277,17 +275,20 @@ const Hero: React.FC<HeroProps> = ({
                   playBottleSound(bottle.key);
                   scrollToProduct(bottle.key);
                 }}
-                className="relative cursor-pointer group pb-10 md:pb-11"
+                className="group relative flex min-h-0 min-w-0 flex-1 cursor-pointer flex-col justify-end"
               >
                 <motion.div 
-                  className="w-[90px] md:w-[180px] lg:w-[240px] xl:w-[280px] h-[240px] md:h-[450px] lg:h-[600px] xl:h-[700px] relative overflow-hidden"
+                  className="relative mx-auto flex h-full min-h-0 w-full items-end justify-center overflow-hidden"
                   whileHover={{ scale: 1.08 }}
                   animate={{ scale: isHeroBottleAnimationEnabled ? 1.08 : 1 }}
                 >
                   <img 
                     src={bottle.heroImage} 
                     alt={t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
-                    className="absolute inset-0 w-full h-full object-contain"
+                    width={450}
+                    height={1400}
+                    decoding="async"
+                    className="block h-auto max-h-full w-auto max-w-full object-contain object-bottom select-none"
                   />
                   <div
                     className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${
@@ -313,17 +314,9 @@ const Hero: React.FC<HeroProps> = ({
                     })}
                   </div>
                 </motion.div>
-                <motion.h1
-                  initial={{ opacity: 0, y: 10 }}
-                  whileHover={{ opacity: 1, y: 0 }}
-                  animate={isHeroBottleAnimationEnabled ? { opacity: 1, y: 0 } : undefined}
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full mt-1 whitespace-nowrap text-sm font-medium drop-shadow-sm"
-                  style={{ color: '#cb2626', fontSize: '0.875rem', lineHeight: '1.25rem' }}
-                >
-                  {t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}
-                </motion.h1>
               </motion.div>
             ))}
+            </div>
           </div>
         )}
       </div>

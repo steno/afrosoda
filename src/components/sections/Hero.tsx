@@ -123,13 +123,13 @@ const Hero: React.FC<HeroProps> = ({
         <RollingBottleCap startDelay={2 + (bottles.length - 1) * 0.2 + 0.8} />
       </div>
       
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 flex flex-col justify-between h-full">
-        <div className="pt-20 md:pt-20 flex-none md:flex-1 flex flex-col justify-center">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 flex flex-col justify-between h-full min-h-0 pb-3 md:pb-6">
+        <div className="pt-20 md:pt-20 flex-none flex flex-col justify-start shrink-0">
           <motion.div
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="text-center mt-2 md:mt-16"
+            className="text-center mt-2 md:mt-6 relative z-20"
           >
             <motion.h1
               animate={{
@@ -254,15 +254,15 @@ const Hero: React.FC<HeroProps> = ({
             </div>
           </div>
         ) : (
-          <div className="hidden md:flex justify-center items-end gap-1 md:gap-2 lg:gap-3 xl:gap-4 px-4 pb-8 md:pb-12">
+          <div className="hidden md:flex justify-center items-end gap-1 md:gap-2 lg:gap-3 xl:gap-4 px-4 pt-2 pb-14 md:pb-16 lg:pb-20">
             {bottles.map((bottle, index) => (
               <motion.div
                 key={bottle.key}
                 initial={{ y: 100, opacity: 0 }}
-                animate={{ y: isHeroBottleAnimationEnabled ? -20 : 0, opacity: 1 }}
+                animate={{ y: isHeroBottleAnimationEnabled ? -12 : 0, opacity: 1 }}
                 transition={{ delay: 2 + index * 0.2, duration: 0.8 }}
                 whileHover={{ 
-                  y: -20,
+                  y: -12,
                   transition: { duration: 0.3 }
                 }}
                 onMouseEnter={() => {
@@ -277,12 +277,12 @@ const Hero: React.FC<HeroProps> = ({
                   playBottleSound(bottle.key);
                   scrollToProduct(bottle.key);
                 }}
-                className="relative cursor-pointer group"
+                className="relative cursor-pointer group pb-10 md:pb-11"
               >
                 <motion.div 
                   className="w-[90px] md:w-[180px] lg:w-[240px] xl:w-[280px] h-[240px] md:h-[450px] lg:h-[600px] xl:h-[700px] relative overflow-hidden"
-                  whileHover={{ scale: 1.1 }}
-                  animate={{ scale: isHeroBottleAnimationEnabled ? 1.1 : 1 }}
+                  whileHover={{ scale: 1.08 }}
+                  animate={{ scale: isHeroBottleAnimationEnabled ? 1.08 : 1 }}
                 >
                   <img 
                     src={bottle.heroImage} 
@@ -317,7 +317,7 @@ const Hero: React.FC<HeroProps> = ({
                   initial={{ opacity: 0, y: 10 }}
                   whileHover={{ opacity: 1, y: 0 }}
                   animate={isHeroBottleAnimationEnabled ? { opacity: 1, y: 0 } : undefined}
-                  className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-sm font-medium"
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full mt-1 whitespace-nowrap text-sm font-medium drop-shadow-sm"
                   style={{ color: '#cb2626', fontSize: '0.875rem', lineHeight: '1.25rem' }}
                 >
                   {t('products', 'bottles', bottle.key as keyof typeof t.products.bottles).name}

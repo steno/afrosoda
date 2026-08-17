@@ -46,6 +46,14 @@ export type Translation = {
   footer: {
     copyright: string;
   };
+  maintenance: {
+    label: string;
+    title: string;
+    body: string;
+    thanks: string;
+    contact: string;
+    legal: string;
+  };
   about: {
     hero: {
       title: string;

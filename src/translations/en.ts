@@ -63,6 +63,14 @@ export const en: Translation = {
   footer: {
     copyright: '© 2024 AfroSoda. Taste The Beat™',
   },
+  maintenance: {
+    label: 'Scheduled Maintenance',
+    title: 'We are migrating to new servers',
+    body: 'AfroSoda is temporarily unavailable while we move the website to new servers. Please check back shortly — we will be back online as soon as the migration is complete.',
+    thanks: 'Thank you for your patience.',
+    contact: 'Contact Us',
+    legal: 'Legal Notice',
+  },
   about: {
     hero: {
       title: 'AfroSoda Story',

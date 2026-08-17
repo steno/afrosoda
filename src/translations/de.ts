@@ -62,6 +62,14 @@ export const de: Translation = {
   footer: {
     copyright: '© 2024 AfroSoda. Taste The Beat™',
   },
+  maintenance: {
+    label: 'Geplante Wartung',
+    title: 'Wir wechseln auf neue Server',
+    body: 'AfroSoda ist vorübergehend nicht erreichbar, während wir die Website auf neue Server umziehen. Bitte schauen Sie in Kürze wieder vorbei — wir sind online, sobald die Migration abgeschlossen ist.',
+    thanks: 'Vielen Dank für Ihre Geduld.',
+    contact: 'Kontakt',
+    legal: 'Impressum',
+  },
   about: {
     hero: {
       title: 'AfroSoda Story',

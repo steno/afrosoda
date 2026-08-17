@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Cookie, Shield, Info } from 'lucide-react';
 import Cookies from 'js-cookie';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { isMaintenanceView } from '../config/maintenance';
 
 interface CookieCategory {
   id: string;
@@ -16,6 +17,7 @@ const CookieConsent: React.FC = () => {
   const [showBanner, setShowBanner] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
   const { language } = useLanguage();
+  const location = useLocation();
   const [cookiePreferences, setCookiePreferences] = useState<Record<string, boolean>>({
     necessary: true,
     functional: false,
@@ -25,6 +27,8 @@ const CookieConsent: React.FC = () => {
 
   // Check if user has already set cookie preferences
   useEffect(() => {
+    if (isMaintenanceView(location.pathname)) return;
+
     const consentCookie = Cookies.get('afrosoda_cookie_consent');
     
     if (!consentCookie) {
@@ -40,7 +44,11 @@ const CookieConsent: React.FC = () => {
         setShowBanner(true);
       }
     }
-  }, []);
+  }, [location.pathname]);
+
+  if (isMaintenanceView(location.pathname)) {
+    return null;
+  }
 
   const cookieCategories: CookieCategory[] = [
     {

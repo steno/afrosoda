@@ -10,10 +10,10 @@ const ImprintPage: React.FC = () => {
   const { language } = useLanguage();
   const { t } = useTranslation();
 
-  const bubbles = Array.from({ length: 150 }, (_, i) => ({
+  const bubbles = Array.from({ length: 40 }, (_, i) => ({
     delay: i * 0.2,
     size: 6 + Math.random() * 28,
-    x: Math.random() * window.innerWidth,
+    x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
   }));
 
   return (
@@ -25,13 +25,13 @@ const ImprintPage: React.FC = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-b from-[#f5821f] via-[#d4451f] to-[#c91713] text-white overflow-hidden">
+      <section className="relative z-10 py-16 bg-gradient-to-b from-[#f5821f] via-[#d4451f] to-[#c91713] text-white overflow-hidden">
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <motion.h1 
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl font-bold text-center mb-6 mt-8 font-heading"
+            className="text-4xl md:text-5xl font-bold text-center mb-4 mt-8 font-heading"
             style={{ color: 'antiquewhite' }}
           >
             {t('imprint', 'hero', 'title')}
@@ -48,7 +48,7 @@ const ImprintPage: React.FC = () => {
       </section>
 
       {/* Main Content */}
-      <div className="py-12 px-4 bg-white">
+      <div className="relative z-10 py-12 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
           
           {/* Company Information */}
